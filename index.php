@@ -1,9 +1,21 @@
 <?php
 	require './lib/Dev.php';
-    $test = 'lollll';
-    $test1 = [1, 2, 3, 4];
-	debug($test);
-	debug($test);
-	debug($test1);
-    //var_dump($test1);
+	use core\Router;
+	use lib\Db;
+
     echo "Lol";
+
+    spl_autoload_register(function($class)
+    {
+       echo '<p>' .$class . '</p>';
+       $path = str_replace('\\', '/', $class.'.php');
+       if (file_exists($path)) {
+	       require $path;
+       }
+    });
+
+    session_start();
+
+    $router = new Router();
+    $dataBase = new Db();
+    $router->run();
