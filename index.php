@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	require './lib/Dev.php';
 	use core\Router;
 	use lib\Db;
@@ -13,8 +14,6 @@
 	       require $path;
        }
     });
-
-    session_start();
 
     $router = new Router();
     $dataBase = new Db();
