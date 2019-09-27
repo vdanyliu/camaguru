@@ -4,8 +4,6 @@
 	use core\Router;
 	use lib\Db;
 
-    echo "Lol";
-
     spl_autoload_register(function($class)
     {
        echo '<p>' .$class . '</p>';
