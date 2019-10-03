@@ -8,7 +8,7 @@
 
 		'account/register' => [
 			'controller' => 'account',
-			'action' => 'login',
+			'action' => 'register',
 		],
 
 		'news/show' => [

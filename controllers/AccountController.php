@@ -10,5 +10,7 @@
 
 		public function registerAction() {
 			echo 'Register page';
+			//debug(mail('ivolodymyrd@gmail.com', "Mail Robot", "Hello"));
+			print phpinfo();
 		}
 	}

@@ -6,6 +6,6 @@
 
 		function __construct()
 		{
-			echo "class db has been created\n";
+			//echo "class db has been created\n";
 		}
 	}
