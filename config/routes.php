@@ -11,11 +11,6 @@
 			'action' => 'register',
 		],
 
-		'news/show' => [
-			'controller' => 'news',
-			'action' => 'show',
-		],
-
 		'' => [
 			'controller' => 'main',
 			'action' => 'index',
