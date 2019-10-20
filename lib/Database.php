@@ -1,6 +1,7 @@
 <?php
 	namespace lib;
 	use \PDO;
+	use config\Config;
 
 	class Database
 	{
@@ -14,7 +15,7 @@
 		private function connect()
 		{
 			try {
-				$config = require_once 'config/config.php';
+				$config = Config::dsn();
 				$dsn = 'mysql:host=' . $config['host'] . ';dbname=' . $config['db_name'] . ';charset=' . $config['charset'];
 				$this->link = new PDO($dsn, $config['username'], $config['password']);
 				$this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -28,6 +29,7 @@
 					$this->link->query("CREATE DATABASE IF NOT EXISTS $dbname");
 					$this->link->query("use $dbname");
 					$this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					Config::userTable($this->link);
 					return $this;
 				}
 				catch (\PDOException $e)
@@ -43,6 +45,11 @@
 			$sth = $this->link->prepare($sql);
 
 			return $sth->execute();
+		}
+
+		public function exec($sql)
+		{
+			return $this->link->exec($sql);
 		}
 
 		public function query($sql)

@@ -1,6 +1,8 @@
 <?php
 	session_start();
 	require './lib/Dev.php';
+
+	use config\Config;
 	use core\Router;
 	use lib\Database;
 
@@ -15,4 +17,5 @@
 
     $router = new Router();
     $dataBase = new Database();
+    //$dataBase->exec("INSERT INTO `users` (`id`, `UserName`, `Password`, `Activated`, `Admin`) VALUES (NULL, 'root', '".crypt('root', 'salt')."', NULL, '1')");
     $router->run();
