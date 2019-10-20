@@ -2,7 +2,7 @@
 	session_start();
 	require './lib/Dev.php';
 	use core\Router;
-	use lib\Db;
+	use lib\Database;
 
     spl_autoload_register(function($class)
     {
@@ -14,5 +14,5 @@
     });
 
     $router = new Router();
-    $dataBase = new Db();
+    $dataBase = new Database();
     $router->run();

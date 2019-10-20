@@ -11,7 +11,7 @@
 		public function __construct()
 		{
 			//echo "class Router has been created\n";
-			$arr = require 'config/routes.php';
+			$arr = require_once 'config/routes.php';
 			foreach ($arr as $route => $param) {
 				$this->add($route, $param);
 			}
