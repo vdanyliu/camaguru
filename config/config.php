@@ -29,13 +29,7 @@
 				Activated char (255) null,
 				Admin int (1) not null);";
 			$PDO->exec($sql);
-			$PDO->exec("INSERT INTO `users` (`id`, `UserName`, `Password`, `Activated`, `Admin`) VALUES (NULL, 'root', '".crypt('root', 'salt')."', NULL, '1')");
+			$PDO->exec("INSERT INTO `users` (`id`, `UserName`, `Password`, `Activated`, `Admin`) VALUES (NULL, 'root', '".crypt('root', 'salt')."', NULL, '0')");
+			$PDO->exec("INSERT INTO `users` (`id`, `UserName`, `Password`, `Activated`, `Admin`) VALUES (NULL, 'root', '".crypt('admin', 'admin')."', NULL, '1')");
 		}
 	}
-//	return [
-//		'host' => 'localhost',
-//		'db_name' => 'camaguru',
-//		'username' => 'root',
-//		'password' => 'qwerty',
-//		'charset' => 'utf8'
-//	];

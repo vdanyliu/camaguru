@@ -2,14 +2,17 @@
 
 	namespace controllers;
 
-	class AccountController {
+	use core\Controller;
+
+	class AccountController extends Controller {
 
 		public function loginAction() {
-			echo 'Login page';
+
+			$this->view->render("Login page");
 		}
 
 		public function registerAction() {
-			echo 'Register page';
+			$this->view->render("Register page");
 			//debug(mail('ivolodymyrd@gmail.com', "Mail Robot", "Hello"));
 			print phpinfo();
 		}

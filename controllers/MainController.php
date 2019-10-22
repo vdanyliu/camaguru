@@ -2,11 +2,14 @@
 
 	namespace controllers;
 
-	class MainController
+	use core\Controller;
+
+	class MainController extends Controller
 	{
 
 		public function indexAction()
 		{
-			echo 'index page';
+			$this->view->render("index page");
+			//echo 'index page';
 		}
 	}

@@ -1,0 +1,1 @@
+index.php from view/main/index
