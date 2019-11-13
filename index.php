@@ -2,7 +2,6 @@
 	session_start();
 	require './lib/Dev.php';
 
-	use config\Config;
 	use core\Router;
 	use lib\Database;
 

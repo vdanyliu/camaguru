@@ -17,9 +17,10 @@
 			];
 		}
 
-		/**
-		 * @return string
-		 */
+        /**
+         * @param $PDO
+         * @return string
+         */
 		static function userTable($PDO)
 		{
 			$table = "users";

@@ -14,7 +14,6 @@
 		{
 			$this->route = $route;
 			$this->path = $route['controller'].'/'.$route['action'];
-			debug($this->path);
 		}
 
 		public function render($title, $vars = [])
