@@ -2,18 +2,13 @@
 
 namespace models;
 
-class Mainn
-{
-	public function __construct()
-	{
-		echo 'Mainn model';
-	}
-}
+use core\Model;
 
-class Main
+class Main extends Model
 {
-	public function __construct()
-	{
-		echo 'Main model';
-	}
+		public function getUsers()
+		{
+			$result = $this->db->query("SELECT * FROM users");
+			return $result;
+		}
 }

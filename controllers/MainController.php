@@ -9,7 +9,11 @@
 
 		public function indexAction()
 		{
-			$this->view->render("index page");
+			$result = $this->model->getUsers();
+			$vars = [
+				'users' => $result,
+			];
+			$this->view->render("index page", $vars);
 			//echo 'index page';
 		}
 	}
