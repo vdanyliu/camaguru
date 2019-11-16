@@ -1,7 +1,23 @@
+header {
+    background-color: #404040;
+    height: 10vh;
+    margin: 2vh auto;
+    width: 98vw;
+    border-radius: 8px;
+    box-shadow: 8px 8px 8px black;
+}
 body {
-    background: #000;
-    color: #fff;
     font-family: 'Indie Flower', cursive;
+    background: #303030;
+    color: #fff;
+    font-size: 120%;
     padding: 0;
     margin: 0;
+}
+A {
+    text-decoration: none;
+    color: red;
+}
+A:visited{
+    color: red;
 }

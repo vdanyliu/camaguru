@@ -18,6 +18,7 @@
 
 		public function render($title, $vars = [])
 		{
+			extract($vars);
 			if (file_exists('views/'.$this->path.'.php')) {
 				ob_start();
 				require 'views/' . $this->path . '.php';

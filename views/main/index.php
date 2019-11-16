@@ -1,6 +1,6 @@
 @index.php from view/main/index@
 
-<?php foreach ($vars['users'] as $key)
+<?php foreach ($users as $key)
 {
 	foreach ($key as $keyarr =>$arr)
 	{
