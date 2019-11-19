@@ -9,3 +9,7 @@
 		echo '<pre>';
 		//exit;
 	}
+	function trim_value(&$value)
+	{
+		$value = trim($value);
+	}

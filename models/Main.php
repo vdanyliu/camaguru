@@ -6,9 +6,9 @@ use core\Model;
 
 class Main extends Model
 {
-		public function getUsers()
-		{
-			$result = $this->db->query("SELECT * FROM users");
-			return $result;
-		}
+	public function getUsers()
+	{
+		$result = $this->db->query("SELECT * FROM users");
+		return $result;
+	}
 }

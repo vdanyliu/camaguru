@@ -13,7 +13,6 @@
 			$vars = [
 				'users' => $result,
 			];
-			$this->view->render("index page", $vars);
-			//echo 'index page';
+			$this->view->render("index page", $vars);;
 		}
 	}

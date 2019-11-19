@@ -11,7 +11,7 @@
 	<p>
 		<a href="/" title="Main" class="headerText">Main</a>
 		<a href="#" title="My profile" class="headerText">My profile</a>
-		<a href="/account/login" title="Login" class="headerText">Login</a>
+		<a href="/account/login" title="Sign in" class="headerText">Sign in</a>
 	</p>
 </header>
 <?php echo $content; ?>

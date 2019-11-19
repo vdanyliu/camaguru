@@ -1,6 +1,7 @@
 <?php
 namespace core;
 use lib\Database;
+use config\Config;
 
 	abstract class Model
 {

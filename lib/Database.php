@@ -17,8 +17,8 @@
 			try {
 				$config = Config::dsn();
 				$dsn = 'mysql:host=' . $config['host'] . ';dbname=' . $config['db_name'] . ';charset=' . $config['charset'];
-				$this->link = new PDO($dsn, $config['username'], $config['password']);
-				$this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$this->link = new PDO($dsn, $config['username'], $config['password'], Config::getOption());
+//				$this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				return $this;
 			}
 			catch (\PDOException $e)
@@ -34,7 +34,7 @@
 				}
 				catch (\PDOException $e)
 				{
-					echo "Connection failed: $e";
+					echo "Connection failed: contact to your administrator";
 					exit (0);
 				}
 			}
@@ -56,7 +56,8 @@
 		{
 			$sth = $this->link->prepare($sql);
 			$sth->execute();
-			$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+			//$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+			$result = $sth->fetchAll();
 
 			if ($result == false)
 			{
