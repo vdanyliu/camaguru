@@ -11,6 +11,11 @@
 			'action' => 'register',
 		],
 
+		'account/verify' => [
+			'controller' => 'account',
+			'action' => 'verify',
+		],
+
 		'' => [
 			'controller' => 'main',
 			'action' => 'index',

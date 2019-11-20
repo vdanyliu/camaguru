@@ -10,6 +10,20 @@
 			$this->view->render("Login page");
 		}
 
+		public function verifyAction()
+		{
+			if (isset($_GET['check']) && $_GET['check'] != 'yes')
+			{
+				$id = $this->model->getUserByVerify($_GET['check']);
+				if ($id)
+				{
+					$this->model->doActivate($id[0]);
+					echo "ACCOUNT ACTIVATED";
+				}
+			}
+			$this->view->render("Verify page");
+		}
+
 		public function registerAction() {
 			if (!empty($_POST))
 			{
@@ -29,12 +43,15 @@
 				if (empty($_POST['error']))
 				{
 					$this->model->addNewUser($_POST);
-					header("Location: /account/login?mailVerify=1");
+					//$this->model-> sendRegistrationMail($_POST);
+					//header("Location: /account/verify?mailVerify=1");
+					// Временное решение :)
+					$verify = $this->model->getVerify($_POST['u_email']);
+					echo "<a href=\"/account/verify?check=".$verify."\" title=\"/account/verify?check=".$verify."\" class=\"headerText\">/account/verify?check=".$verify."</a>";
 					exit();
 				}
 			}
 			$this->view->render("Register page");
 			//debug(mail('ivolodymyrd@gmail.com', "Mail Robot", "Hello"));
-			//print phpinfo();
 		}
 	}
