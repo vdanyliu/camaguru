@@ -21,8 +21,8 @@ class Account extends Model
 	public function addNewUser()
 	{
 		extract($_POST);
-		//echo "INSERT INTO `users` (`id`, `UserName`, `UserEmail`, `Password`, `Activated`, `Admin`) VALUES (NULL, '$u_nickname', '$u_email', '".password_hash($u_pass, PASSWORD_BCRYPT)."', '".password_hash($u_nickname, PASSWORD_BCRYPT)."', '0')";
-		$this->db->execute("INSERT INTO `users` (`id`, `UserName`, `UserEmail`, `Password`, `Activated`, `Admin`) VALUES (NULL, '$u_nickname', '$u_email', '".password_hash($u_pass, PASSWORD_BCRYPT)."', '".password_hash($u_nickname, PASSWORD_BCRYPT)."', '0')");
+		$_POST['1'] = password_hash($u_nickname, PASSWORD_BCRYPT);
+		$this->db->execute("INSERT INTO `users` (`id`, `UserName`, `UserEmail`, `Password`, `Activated`, `Admin`) VALUES (NULL, '$u_nickname', '$u_email', '".password_hash($u_pass, PASSWORD_BCRYPT)."', '".$_POST['1']."', '0')");
 	}
 
 	public function sendRegistrationMail()

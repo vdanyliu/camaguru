@@ -46,7 +46,7 @@
 					//$this->model-> sendRegistrationMail($_POST);
 					//header("Location: /account/verify?mailVerify=1");
 					// Временное решение :)
-					$verify = $this->model->getVerify($_POST['u_email']);
+					$verify = $_POST['1'];
 					echo "<a href=\"/account/verify?check=".$verify."\" title=\"/account/verify?check=".$verify."\" class=\"headerText\">/account/verify?check=".$verify."</a>";
 					exit();
 				}
