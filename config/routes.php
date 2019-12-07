@@ -16,6 +16,16 @@
 			'action' => 'verify',
 		],
 
+		'profile/createPhoto' => [
+			'controller' => 'profile',
+			'action' => 'createPhoto',
+		],
+
+		'profile/settings' => [
+			'controller' => 'profile',
+			'action' => 'settings',
+		],
+
 		'' => [
 			'controller' => 'main',
 			'action' => 'index',

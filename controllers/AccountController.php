@@ -6,7 +6,22 @@
 	class AccountController extends Controller {
 
 		public function loginAction() {
-
+			if (!empty($_POST))
+			{
+				array_walk($_POST, 'trim_value');
+				foreach ($_POST as $key => $value)
+					echo $key."=>".$value."<br>";
+				$userARR = $this->model->getUserByEmail($_POST['u_email']);
+				if (!$this->model->doCheckVerify($userARR))
+					$_POST['error'][] = "You have not verified your email<br>";
+				if (!$this->model->doCheckPassword($userARR))
+					$_POST['error'][] = "Password is incorrect<br>";
+				if (empty($_POST['error']))
+				{
+					var_dump($userARR);
+					$_SESSION['user'] = $userARR['UserName'];
+				}
+			}
 			$this->view->render("Login page");
 		}
 
@@ -28,7 +43,6 @@
 			if (!empty($_POST))
 			{
 				array_walk($_POST, 'trim_value');
-				trim($_POST['u_nickname']);
 				foreach ($_POST as $key => $value) {
 					echo $key . '->' . $value . '<br>';
 				}
@@ -43,7 +57,7 @@
 				if (empty($_POST['error']))
 				{
 					$this->model->addNewUser($_POST);
-					//$this->model-> sendRegistrationMail($_POST);
+					//$this->model-> sendRegistrationMail();
 					//header("Location: /account/verify?mailVerify=1");
 					// Временное решение :)
 					$verify = $_POST['1'];

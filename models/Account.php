@@ -41,4 +41,24 @@ class Account extends Model
 		$id = $verify['id'];
 		$this->db->execute("UPDATE `users` SET `Activated` = 'yes' WHERE `users`.`id` = $id");
 	}
+
+	public function getUserByEmail($mail)
+	{
+		$result = $this->db->query("SELECT * FROM users WHERE UserEmail ='$mail'");
+		if ($result)
+			return $result[0];
+		return $result;
+	}
+
+	public function doCheckVerify($userArr)
+	{
+		if ($userArr['Activated'] == 'yes')
+			return TRUE;
+		return FALSE;
+	}
+
+	public function doCheckPassword($userArr)
+	{
+		return password_verify($_POST['u_pass'], $userArr['Password']);
+	}
 }
