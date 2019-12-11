@@ -26,23 +26,28 @@ class Profile extends Model
 			foreach ($_FILES['imageFromForm'] as $key => $value)
 				echo $key . "=>" . $value . "<br>";
 			echo $newfilename . "<br>";
-			$this->mereWithLogo($newfilename);
+			$this->mergeWithLogo($newfilename);
 		}
 	}
 
-	public function mereWithLogo($imgDest)
+	public function mergeWithLogo($imgDest)
 	{
 		$idImg = imagecreatefromjpeg($imgDest);
-		$idLogo = imagecreatefrompng("img/maxresdefault111.png");
-		imagealphablending($idImg, false);
-		imagesavealpha($idImg, true);
+		$idLogo = imagecreatefrompng("img/text.png");
+		//imagealphablending($idImg, false);
+		//imagesavealpha($idImg, true);
 		//imagetruecolortopalette($idImg, true, 128);
 		imagealphablending($idLogo, false);
 		imagesavealpha($idLogo, true);
+		$blind = imagecolorallocate($idLogo, 111,111,111);
+		imagefill($idLogo, 10, 10, $blind);
+		imagecolortransparent($idLogo, $blind);
 
-		//imagecopymerge($idImg, $idLogo, 500, 200, 300, 300, 300, 300, 100);
+		imagecopymerge($idImg, $idLogo, 240, 500, 0, 0, 514, 428, 100);
+		imagecopymerge($idImg, $idLogo, 600, 500, 100, 0, 514, 428, 100);
 		$resultimage = "img/122.jpg";
 		imagepng($idImg, $resultimage);
-		echo "<img src=".$resultimage.">";
+		echo "<img src=".$resultimage."><br>";
+
 	}
 }
