@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<title><?php echo $title; ?></title>
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
 	<link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
 	<base href="/" />
 </head>
 <body>

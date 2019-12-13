@@ -20,7 +20,10 @@
 		public function settingsAction()
 		{
 			//$this->model->check();
-			$this->view->render("Settings");
-			$this->model->mergeWithLogo("img/1cc8ca71-4467-4a79-9c9b-8f705a2e730f.jpg");
+			ob_start();
+			$this->model->mergeWithLogo("img/5ded55e76debd7.76984004.jpg");
+			$arr['dev1'] = ob_get_clean();
+			$this->view->render("Settings", $arr);
+			//$this->model->mergeWithLogo("img/5ded55e76debd7.76984004.jpg");
 		}
 	}

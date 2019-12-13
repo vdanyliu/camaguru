@@ -18,6 +18,10 @@ A {
     text-decoration: none;
     color: red;
 }
-A:visited{
+A:visited {
     color: red;
+}
+.img1 {
+    border-radius: 50%;
+    width:70%;
 }
