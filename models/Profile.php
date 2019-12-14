@@ -44,8 +44,8 @@ class Profile extends Model
 		//imagefill($idLogo, 10, 10, $blind);
 		imagecolortransparent($idLogo, $blind);
 
-		imagecopymerge($idImg, $idLogo, 240, 500, 0, 0, 514, 428, 100);
-		imagecopymerge($idImg, $idLogo, 700, 500, 0, 0, 514, 428, 100);
+		imagecopymerge($idImg, $idLogo, 240, 400, 0, 0, 514, 428, 100);
+		//imagecopymerge($idImg, $idLogo, 700, 500, 0, 0, 514, 428, 100);
 		$resultimage = "img/122.jpg";
 		imagepng($idImg, $resultimage);
 		//imagepng($idLogo);

@@ -30,10 +30,12 @@
 					$this->link->query("use $dbname");
 					$this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					Config::userTable($this->link);
+					Config::photoTable($this->link);
 					return $this;
 				}
 				catch (\PDOException $e)
 				{
+					echo $e;
 					echo "Connection failed: contact to your administrator";
 					exit (0);
 				}

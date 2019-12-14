@@ -44,5 +44,18 @@
 			$PDO->exec($sql);
 			$PDO->exec("INSERT INTO `users` (`id`, `UserName`, `UserEmail`, `Password`, `Activated`, `Admin`) VALUES (NULL, 'root', 'a@ukr.net', '".crypt('root', 'salt')."', NULL, '1');");
 			$PDO->exec("INSERT INTO `users` (`id`, `UserName`, `UserEmail`, `Password`, `Activated`, `Admin`) VALUES (NULL, 'admin', 'admin@ukr.net', '".crypt('admin', 'admin')."', NULL, '1');");
+			return (0);
+		}
+		static function photoTable($PDO)
+		{
+			$table = "photos";
+			$sql = "CREATE TABLE $table(
+				id int(11) AUTO_INCREMENT PRIMARY KEY,
+				dest CHAR (255) NOT NULL,
+				userId CHAR (255) NOT NULL,
+				date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+				comment char (255) NOT NULL,
+				likes INT NOT NULL DEFAULT '0');";
+			$PDO->exec($sql);
 		}
 	}
