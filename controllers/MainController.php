@@ -16,6 +16,6 @@
 			];
 			$this->view->render("index page", $vars);
 			//phpinfo();
-			var_dump(gd_info());
+			//var_dump(gd_info());
 		}
 	}
