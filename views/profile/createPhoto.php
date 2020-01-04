@@ -20,7 +20,8 @@
 
     // Trigger photo take
     document.getElementById("snap").addEventListener("click", function() {
-        context.drawImage(video2, 0, 0, 640, 480);
+        //context.drawImage(video2, 0, 0, 640, 480);
+        context.drawImage(video2, 0, 0);
     });
 </script>
 <div class="addPhoto">
