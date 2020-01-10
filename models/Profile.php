@@ -32,27 +32,25 @@ class Profile extends Model
 
 	public function mergeWithLogo($imgDest)
 	{
-		$idImg = imagecreatefromjpeg($imgDest);
+		//$idImg = imagecreatefromjpeg($imgDest);
+		$idImg = imagecreatefrompng($imgDest);
 		//$idLogo = imagecreatefrompng("img/text.png");
 		$idLogo = imagecreatefrompng("img/cat2.png");
-		//imagealphablending($idImg, false);
-		//imagesavealpha($idImg, true);
-		//imagetruecolortopalette($idImg, true, 128);
 		imagealphablending($idLogo, true);
 		imagesavealpha($idLogo, true);
-		//$blind = imagecolorallocate($idLogo, 30,30,30);
 		$blind = imagecolorat($idLogo, 20, 20);
-		//imagefill($idLogo, 10, 10, $blind);
 		imagecolortransparent($idLogo, $blind);
 
-		imagecopymerge($idImg, $idLogo, 240, 400, 0, 0, 514, 428, 100);
+		imagecopymerge($idImg, $idLogo, 100, 100, 0, 0, 514, 428, 100);
 		//imagecopymerge($idImg, $idLogo, 700, 500, 0, 0, 514, 428, 100);
 		$resultimage = "img/122.jpg";
 		imagepng($idImg, $resultimage);
-		//echo "<img src=".$resultimage." style=\"width:70%; border-radius: 50%\" class=\"img1\"><br>";
-		echo "<img src=".$resultimage." class=\"img1\"><br>";
 		ob_start();
 		imagepng($idLogo);
+		$i = ob_get_clean();
+		echo "<img src='data:image/png;base64," . base64_encode( $i )."'>";
+		ob_start();
+		imagepng($idImg);
 		$i = ob_get_clean();
 		echo "<img src='data:image/png;base64," . base64_encode( $i )."'>";
 
