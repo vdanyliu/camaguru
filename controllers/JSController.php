@@ -9,9 +9,15 @@
 
 		public function requestAction()
 		{
-			if (isset($_POST['imageSrc']))
+//			if (isset($_POST['imageSrc']))
+//			{
+//				$this->model->mergeWithLogo($_POST['imageSrc']);
+//			}
+			if ($_POST)
 			{
-				$this->model->mergeWithLogo($_POST['imageSrc']);
+					$metod = key($_POST);
+					$this->model->$metod();
+					//$this->model->imageSrc($key);
 			}
 		}
 	}
