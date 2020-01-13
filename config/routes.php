@@ -25,6 +25,10 @@
 			'controller' => 'profile',
 			'action' => 'settings',
 		],
+		'JS/request' => [
+			'controller' => 'JS',
+			'action' => 'request',
+		],
 
 		'' => [
 			'controller' => 'main',
