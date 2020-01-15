@@ -17,6 +17,7 @@ class Profile extends Model
 		$filetmp = $_FILES['imageFromForm']['tmp_name'];
 		$fileExt = explode('.', $fileName);
 		$fileActualExt = strtolower(end($fileExt));
+		var_dump($filetmp);
 		if($filetmp != NULL && exif_imagetype($filetmp))
 		{
 			$newfilename = "img/" . uniqid("", true) . "." . $fileActualExt;

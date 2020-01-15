@@ -9,7 +9,6 @@
 
 		public function createPhotoAction()
 		{
-			var_dump($_POST);
 			//var_dump($_FILES);
 			$this->model->check();
 			$this->view->render("addPhoto");

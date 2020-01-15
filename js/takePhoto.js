@@ -22,11 +22,11 @@
 
         //document.getElementById('canvas').style.display = 'none';
         context.drawImage(video2, 0, 0);
-        var image = new Image();
+        let image = new Image();
         image.src = canvas.toDataURL("image/png");
-        var data = new FormData();
+        let data = new FormData();
         data.append('imageSrc', image.src);
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.open('POST', 'JS/request', true);
         xhr.onload = function () {
             console.log(this.responseText);
@@ -38,27 +38,36 @@
         xhr.send(data);
     });
 
-
     document.getElementById("download").addEventListener('click', function () {
         let canvas = document.getElementById('canvas');
         let context = canvas.getContext('2d');
         let video2 = document.getElementById('input').files[0];
         let reader = new FileReader();
-        var image = new Image();
+        let image = new Image();
+        let photo = document.getElementById('photo');
         reader.onloadend = function()
         {
-            var data = new FormData();
+            let data = new FormData();
+            let file = reader.result;
             data.append('imageSrc', reader.result);
-            var xhr = new XMLHttpRequest();
+            let xhr = new XMLHttpRequest();
             xhr.open('POST', 'JS/request', true);
             xhr.onload = function () {
-                console.log(this.responseText);
+                //console.log(this.responseText);
                 //document.body.innerHTML = "";
                 //document.write(this.responseText);
-                let photo = document.getElementById('photo');
                 photo.innerHTML = this.responseText;
             };
             xhr.send(data);
         };
-        reader.readAsDataURL(video2);
+        if (!video2)
+        {
+            photo.innerHTML = "select file first!!!!!";
+        }
+        else if (video2.size > 5000000) {
+            photo.innerHTML = "file too big (5Mb max)";
+        }
+        else {
+            reader.readAsDataURL(video2);
+        }
     });

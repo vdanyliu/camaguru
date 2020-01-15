@@ -7,9 +7,5 @@
 </div>
 <script src="/js/takePhoto.js"></script>
 <div class="addPhoto">
-	<form action="profile/createPhoto" method="post" enctype="multipart/form-data">
-		<p>Download image</p>
-		<p><input type="file" id ='input' name="imageFromForm">
-            <input name="submit" type="submit" value="Submit"></p>
-	</form>
+    <p><input type="file" id ='input' name="imageFromForm">
 </div>
