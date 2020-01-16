@@ -13,7 +13,7 @@
 //			{
 //				$this->model->mergeWithLogo($_POST['imageSrc']);
 //			}
-			var_dump($_POST);
+			//var_dump($_POST);
 			if ($_POST)
 			{
 					$metod = key($_POST);
