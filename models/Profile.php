@@ -34,8 +34,8 @@ class Profile extends Model
 	{
 		//$idImg = imagecreatefromjpeg($imgDest);
 		$idImg = imagecreatefrompng($imgDest);
-		//$idLogo = imagecreatefrompng("img/text.png");
-		$idLogo = imagecreatefrompng("img/cat2.png");
+		$idLogo = imagecreatefrompng("img/text.png");
+		//$idLogo = imagecreatefrompng("img/cat2.png");
 		imagealphablending($idLogo, true);
 		imagesavealpha($idLogo, true);
 		$blind = imagecolorat($idLogo, 20, 20);
