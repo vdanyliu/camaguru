@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!--	<title>--><?php //echo $title; ?><!--</title>-->
-<!--	<link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">-->
-<!--	<link rel="stylesheet" type="text/css" href="/css/main.css">-->
-<!--	<base href="/" />-->
+	<title><?php echo $title; ?></title>
+	<link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<base href="/" />
 </head>
 <body>
 <header class="header">
