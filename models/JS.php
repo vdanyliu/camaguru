@@ -3,7 +3,7 @@
 namespace models;
 
 use core\Model;
-use mysql_xdevapi\Exception;
+use config\Config;
 
 class JS extends Model
 {
@@ -13,27 +13,7 @@ class JS extends Model
 		$heightNew = 480;
 		$widthLogo = 150;
 		$heightLogo = 150;
-		$forbiddenImages = [
-			false => false,
-			IMAGETYPE_GIF => true,
-			IMAGETYPE_JPEG => true,
-			IMAGETYPE_PNG => true,
-			IMAGETYPE_SWF => false,
-			IMAGETYPE_PSD => false,
-			IMAGETYPE_BMP => false,
-			IMAGETYPE_TIFF_II => false,
-			IMAGETYPE_TIFF_MM => false,
-			IMAGETYPE_JPC => false,
-			IMAGETYPE_JP2 => false,
-			IMAGETYPE_JPX => false,
-			IMAGETYPE_JB2 => false,
-			IMAGETYPE_SWC => false,
-			IMAGETYPE_IFF => false,
-			IMAGETYPE_WBMP => false,
-			IMAGETYPE_XBM => false,
-			IMAGETYPE_ICO => false,
-			IMAGETYPE_WEBP => false
-		];
+		$forbiddenImages = Config::forbiddenImages();
 
 		$imgDest = $_POST['imageSrc'];
 

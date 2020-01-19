@@ -12,14 +12,17 @@
 				foreach ($_POST as $key => $value)
 					echo $key."=>".$value."<br>";
 				$userARR = $this->model->getUserByEmail($_POST['u_email']);
-				if (!$this->model->doCheckVerify($userARR))
-					$_POST['error'][] = "You have not verified your email<br>";
-				if (!$this->model->doCheckPassword($userARR))
-					$_POST['error'][] = "Password is incorrect<br>";
-				if (empty($_POST['error']))
-				{
-					var_dump($userARR);
-					$_SESSION['user'] = $userARR['UserName'];
+				if (!$userARR)
+					$_POST['error'][] = "Email incorrect";
+				else {
+					if (!$this->model->doCheckVerify($userARR))
+						$_POST['error'][] = "You have not verified your email<br>";
+					if (!$this->model->doCheckPassword($userARR))
+						$_POST['error'][] = "Password is incorrect<br>";
+					if (empty($_POST['error'])) {
+						var_dump($userARR);
+						$_SESSION['user'] = $userARR['UserName'];
+					}
 				}
 			}
 			$this->view->render("Login page");

@@ -11,4 +11,5 @@ use config\Config;
 	{
 		$this->db = new Database();
 	}
+
 }

@@ -27,6 +27,31 @@
 			return $opt;
 		}
 
+		static function forbiddenImages()
+		{
+			return [
+				false => false,
+				IMAGETYPE_GIF => true,
+				IMAGETYPE_JPEG => true,
+				IMAGETYPE_PNG => true,
+				IMAGETYPE_SWF => false,
+				IMAGETYPE_PSD => false,
+				IMAGETYPE_BMP => false,
+				IMAGETYPE_TIFF_II => false,
+				IMAGETYPE_TIFF_MM => false,
+				IMAGETYPE_JPC => false,
+				IMAGETYPE_JP2 => false,
+				IMAGETYPE_JPX => false,
+				IMAGETYPE_JB2 => false,
+				IMAGETYPE_SWC => false,
+				IMAGETYPE_IFF => false,
+				IMAGETYPE_WBMP => false,
+				IMAGETYPE_XBM => false,
+				IMAGETYPE_ICO => false,
+				IMAGETYPE_WEBP => false
+			];
+		}
+
         /**
          * @param $PDO
          * @return string
@@ -58,4 +83,5 @@
 				likes INT NOT NULL DEFAULT '0');";
 			$PDO->exec($sql);
 		}
+
 	}
