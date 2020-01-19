@@ -1,5 +1,6 @@
 <?php
 	session_start();
+//	session_destroy();
 	require './lib/Dev.php';
 
 	use core\Router;

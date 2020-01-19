@@ -9,7 +9,6 @@
 
 		public function indexAction()
 		{
-			var_dump($_SESSION);
 			$result = $this->model->getUsers();
 			$vars = [
 				'users' => $result,
