@@ -1,6 +1,7 @@
 <?php
 	session_start();
 //	session_destroy();
+header("Content-Type: */*");
 	require './lib/Dev.php';
 
 	use core\Router;
