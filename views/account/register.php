@@ -28,5 +28,6 @@
 		<div class=registerButton">
 			<input name="submit" type="submit" value="Submit"><br>
 		</div>
+        <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
 	</form>
 </div>

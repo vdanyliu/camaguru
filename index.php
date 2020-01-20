@@ -1,7 +1,7 @@
 <?php
 	session_start();
 //	session_destroy();
-header("Content-Type: */*");
+//	header("Content-Type: */*");
 	require './lib/Dev.php';
 
 	use core\Router;
@@ -20,6 +20,4 @@ header("Content-Type: */*");
     $dataBase = new Database();
     //$dataBase->exec("INSERT INTO `users` (`id`, `UserName`, `Password`, `Activated`, `Admin`) VALUES (NULL, 'root', '".crypt('root', 'salt')."', NULL, '1')");
     $router->run();
-//	header("content-type: image/png");
-//	$idLogo = imagecreatefrompng("img/cat2.png");
-//	imagepng($idLogo);
+

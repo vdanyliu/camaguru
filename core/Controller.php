@@ -10,18 +10,18 @@
 
 		public function __construct($route)
 		{
+			if (!isset($_SESSION['token'])) {
+				$this->generateFormToken('token');
+			}
 			if (!empty($_POST)) {
-				if ($this->checkFormToken('token')) {
-					$this->generateFormToken('token');
-				} else {
-					echo "222";
+				if (!$this->checkFormToken('token')) {
 					var_dump($_POST);
 					var_dump($_SESSION);
 					echo "token error";
 					exit (0);
 				}
 			}
-
+			$this->generateFormToken('token');
 			$this->route = $route;
 			$this->view = new View($route);
 			$this->model = $this->loadModel($route['controller']);
@@ -40,6 +40,7 @@
 		{
 			$token = md5(uniqid(microtime(), true));
 			$_SESSION[$form] = $token;
+			//echo $token;
 			return $token;
 		}
 
@@ -55,7 +56,7 @@
 			}
 			// compare the tokens against each other if they are still the same
 			if ($_SESSION[$form] !== $_POST[$form]) {
-				echo "Hack-Attempt detected. Got ya!.<br>";
+				die(0);
 				return false;
 			}
 			return true;
