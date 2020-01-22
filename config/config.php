@@ -12,8 +12,8 @@
 				'host' => 'localhost',
 				'db_name' => 'camaguru',
 				'username' => 'root',
-				//'password' => 'qwerty',
-                'password' => 'root',
+				'password' => 'qwerty',
+                //'password' => 'root',
 				'charset' => 'utf8'
 			];
 		}

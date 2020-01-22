@@ -18,7 +18,7 @@
 				$config = Config::dsn();
 				$dsn = 'mysql:host=' . $config['host'] . ';dbname=' . $config['db_name'] . ';charset=' . $config['charset'];
 				$this->link = new PDO($dsn, $config['username'], $config['password'], Config::getOption());
-//				$this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				$this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				return $this;
 			}
 			catch (\PDOException $e)

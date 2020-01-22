@@ -20,7 +20,7 @@
 		echo "</a>";
 		?>
 	</p>
-<!--    <input name="token" value="--><?php //echo $_SESSION['token']; ?><!--">-->
+    <input id="token" value="<?php echo $_SESSION['token']; ?>">
 </header>
 <?php echo $content; ?>
 </body>

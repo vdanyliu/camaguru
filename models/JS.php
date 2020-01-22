@@ -83,7 +83,15 @@ class JS extends Model
 		imagepng($idImg);
 		$i = ob_get_clean();
 		//echo "<img src='data:image/png;base64," . base64_encode($i) . "' alt=”animated”>";
-		echo "data:image/png;base64," . base64_encode($i);
-		//imagepng($idImg);
+		header('Content-Type: application/json');
+		$json = array(
+			"img" => "data:image/png;base64," . base64_encode($i),
+			"token" => $_SESSION['token']
+		);
+		//var_dump("data:image/png;base64," . base64_encode($i));
+		//var_dump(json_encode($json));
+		header("Content-Type: text/html");
+		echo json_encode( $json );
+		//echo "data:image/png;base64," . base64_encode($i);
 	}
 }
