@@ -9,13 +9,13 @@
 
 		public function indexAction()
 		{
+			var_dump($_SESSION);
+			$_POST['token'] = $this->model->generateFormToken('token');
 			$result = $this->model->getUsers();
 			$vars = [
 				'users' => $result,
 			];
 			$this->view->render("index page", $vars);
-			var_dump($_SESSION);
-			$_POST['token'] = $this->model->generateFormToken('token');
 			//phpinfo();
 			//var_dump(gd_info());
 		}
