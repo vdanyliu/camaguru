@@ -54,6 +54,18 @@ class Profile extends Model
 		imagepng($idImg);
 		$i = ob_get_clean();
 		echo "<img src='data:image/png;base64," . base64_encode( $i )."'>";
+	}
 
+	public function viewSelectablimgs($imgArr)
+	{
+		foreach ($imgArr as $key => $value)
+		{
+//			ob_start();
+//			imagepng($idImg);
+//			$i = ob_get_clean();
+//			echo "<img id=\"".$key."\"src='data:image/png;base64," . base64_encode( $i )."'>";
+			echo "<img id='".$key."' onClick=\"picLoad(this.id)\" src='" . $value."'<br>";
+//			echo "<img id='pic' src='" . $value."'<br>";
+		}
 	}
 }

@@ -25,3 +25,8 @@ A:visited {
     border-radius: 50%;
     width:50%;
 }
+
+.selectPhoto img{
+    width: 10vw;
+    height: 10vh;
+}

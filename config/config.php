@@ -12,8 +12,8 @@
 				'host' => 'localhost',
 				'db_name' => 'camaguru',
 				'username' => 'root',
-				'password' => 'qwerty',
-                //'password' => 'root',
+//				'password' => 'qwerty',
+                'password' => 'root',
 				'charset' => 'utf8'
 			];
 		}
@@ -49,6 +49,15 @@
 				IMAGETYPE_XBM => false,
 				IMAGETYPE_ICO => false,
 				IMAGETYPE_WEBP => false
+			];
+		}
+		
+		static function selectableImages()
+		{
+			return [
+				1 => "img/cat2.png",
+				2 => "img/cat1.png",
+				3 => "img/krol1.png",
 			];
 		}
 
