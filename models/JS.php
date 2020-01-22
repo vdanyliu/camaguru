@@ -22,7 +22,7 @@ class JS extends Model
 			$idPic = $imgPic[$idPic];
 		}
 		else {
-			$idPic = $imgPic['1'];
+			$idPic = $imgPic['0'];
 		}
 
 		if ($forbiddenImages[exif_imagetype($imgDest)]) {

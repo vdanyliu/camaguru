@@ -54,11 +54,17 @@
 		
 		static function selectableImages()
 		{
-			return [
-				1 => "img/cat2.png",
-				2 => "img/cat1.png",
-				3 => "img/krol1.png",
-			];
+			$arr = [];
+			foreach (glob("img/_*.png") as $img)
+			{
+				array_push($arr, $img);
+			}
+			return $arr;
+//			return [
+//				0 => "img/cat2.png",
+//				1 => "img/cat1.png",
+//				2 => "img/krol1.png",
+//			];
 		}
 
         /**

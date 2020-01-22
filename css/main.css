@@ -27,6 +27,6 @@ A:visited {
 }
 
 .selectPhoto img{
-    width: 10vw;
-    height: 10vh;
+    width: auto;
+    height: 10vw;
 }
