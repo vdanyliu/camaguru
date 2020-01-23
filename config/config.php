@@ -12,8 +12,8 @@
 				'host' => 'localhost',
 				'db_name' => 'camaguru',
 				'username' => 'root',
-				'password' => 'qwerty',
-                //'password' => 'root',
+//				'password' => 'qwerty',
+                'password' => 'root',
 				'charset' => 'utf8'
 			];
 		}
@@ -50,6 +50,21 @@
 				IMAGETYPE_ICO => false,
 				IMAGETYPE_WEBP => false
 			];
+		}
+		
+		static function selectableImages()
+		{
+			$arr = [];
+			foreach (glob("img/_*.*") as $img)
+			{
+				array_push($arr, $img);
+			}
+			return $arr;
+//			return [
+//				0 => "img/cat2.png",
+//				1 => "img/cat1.png",
+//				2 => "img/krol1.png",
+//			];
 		}
 
         /**

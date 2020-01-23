@@ -7,8 +7,12 @@
 <div class="addPhoto">
     <div class="PhotoDownload">
         <input type="file" id ='input' name="imageFromForm">
-        <button id="snap">Snap Photo</button>
-        <button id="download">Download photo</button>
+		<input id="pic">
+        <button disabled id="snap">Snap Photo</button>
+        <button disabled id="download">Download photo</button>
     </div>
+	<div class="selectPhoto">
+		<?php echo $photos ?>
+	</div>
 </div>
 <script src="/js/takePhoto.js"></script>

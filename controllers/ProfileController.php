@@ -2,6 +2,7 @@
 
 	namespace controllers;
 
+	use config\Config;
 	use core\Controller;
 
 	class ProfileController extends Controller
@@ -9,17 +10,10 @@
 
 		public function createPhotoAction()
 		{
-			//var_dump($_FILES);
-			$this->model->check();
-			$this->view->render("addPhoto");
-			if (isset($_POST) && isset($_FILES['imageFromForm']))
-			{
-				$this->model->addPhotoFromPost();
-			}
-			else if (isset($_POST['imageSrc']))
-			{
-				$this->model->mergeWithLogo($_POST['imageSrc']);
-			}
+			ob_start();
+			$this->model->viewSelectablimgs(Config::selectableImages());
+			$arr['photos'] = ob_get_clean();
+			$this->view->render("addPhoto", $arr);
 		}
 
 		public function settingsAction()

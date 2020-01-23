@@ -30,6 +30,7 @@ var video = document.getElementById('video');
         image.src = canvas.toDataURL("image/png");
         let data = new FormData();
         data.append('imageSrc', image.src);
+        data.append('imagePic', document.getElementById('pic').value);
         data.append('token', token.value);
         let xhr = new XMLHttpRequest();
         xhr.open('POST', 'JS/request');
@@ -64,6 +65,7 @@ var video = document.getElementById('video');
         reader.onloadend = function() {
             let data = new FormData();
             data.append('imageSrc', reader.result);
+            data.append('imagePic', document.getElementById('pic').value);
             data.append('token', token.value);
             let xhr = new XMLHttpRequest();
             xhr.open('POST', 'JS/request', true);
@@ -104,3 +106,9 @@ var video = document.getElementById('video');
             reader.readAsDataURL(video2);
         }
     });
+
+ function picLoad(id) {
+     document.getElementById('pic').value = id;
+     document.getElementById('snap').disabled = false;
+     document.getElementById('download').disabled = false;
+ };

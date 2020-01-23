@@ -14,8 +14,16 @@ class JS extends Model
 		$widthLogo = 150;
 		$heightLogo = 150;
 		$forbiddenImages = Config::forbiddenImages();
-
+		$imgPic = Config::selectableImages();
 		$imgDest = $_POST['imageSrc'];
+		$idPic = $_POST['imagePic'];
+
+		if (array_key_exists($idPic, $imgPic)) {
+			$idPic = $imgPic[$idPic];
+		}
+		else {
+			$idPic = $imgPic['0'];
+		}
 
 		if ($forbiddenImages[exif_imagetype($imgDest)]) {
 			$ex = explode(',', $imgDest);
@@ -60,8 +68,17 @@ class JS extends Model
 		imagedestroy($idImg);
 		$idImg = $new;
 
-		$idLogo = imagecreatefrompng("img/cat2.png");
-		$infoPhoto = getimagesize("img/cat2.png");
+		//$idLogo = imagecreatefrompng($idPic);
+		//
+		//var_dump($idPic);
+		$idLogo = file_get_contents($idPic, FILE_USE_INCLUDE_PATH);
+		//$idPic = base64_encode($idPic);
+		//var_dump($idPic);
+
+		$idLogo = imagecreatefromstring($idLogo);
+		//var_dump($idPic);
+		//
+		$infoPhoto = getimagesize($idPic);
 		$width = $infoPhoto[0];
 		$height = $infoPhoto[1];
 
@@ -98,5 +115,9 @@ class JS extends Model
 		);
 		echo json_encode( $json );
 		//echo "data:image/png;base64," . base64_encode($i);
+	}
+	function resizeImg()
+	{
+
 	}
 }
