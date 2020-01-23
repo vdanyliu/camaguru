@@ -42,22 +42,17 @@
 			}
 		}
 
-		public function execute($sql)
+
+		public function execute($sql, $arr = [])
 		{
 			$sth = $this->link->prepare($sql);
-
-			return $sth->execute();
+			return $sth->execute($arr);
 		}
 
-		public function exec($sql)
-		{
-			return $this->link->exec($sql);
-		}
-
-		public function query($sql)
+		public function query($sql, $arr = [])
 		{
 			$sth = $this->link->prepare($sql);
-			$sth->execute();
+			$sth->execute($arr);
 			//$result = $sth->fetchAll(PDO::FETCH_ASSOC);
 			$result = $sth->fetchAll();
 

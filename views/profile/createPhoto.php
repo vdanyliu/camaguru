@@ -7,7 +7,7 @@
 <div class="addPhoto">
     <div class="PhotoDownload">
         <input type="file" id ='input' name="imageFromForm">
-		<input id="pic">
+		<input hidden id="pic">
         <button disabled id="snap">Snap Photo</button>
         <button disabled id="download">Download photo</button>
     </div>
