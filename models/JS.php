@@ -60,7 +60,16 @@ class JS extends Model
 		imagedestroy($idImg);
 		$idImg = $new;
 
-		$idLogo = imagecreatefrompng($idPic);
+		//$idLogo = imagecreatefrompng($idPic);
+		//
+		//var_dump($idPic);
+		$idLogo = file_get_contents($idPic, FILE_USE_INCLUDE_PATH);
+		//$idPic = base64_encode($idPic);
+		//var_dump($idPic);
+
+		$idLogo = imagecreatefromstring($idLogo);
+		//var_dump($idPic);
+		//
 		$infoPhoto = getimagesize($idPic);
 		$width = $infoPhoto[0];
 		$height = $infoPhoto[1];

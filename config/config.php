@@ -55,7 +55,7 @@
 		static function selectableImages()
 		{
 			$arr = [];
-			foreach (glob("img/_*.png") as $img)
+			foreach (glob("img/_*.*") as $img)
 			{
 				array_push($arr, $img);
 			}
