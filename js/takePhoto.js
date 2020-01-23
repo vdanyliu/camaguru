@@ -68,24 +68,25 @@ var video = document.getElementById('video');
             let xhr = new XMLHttpRequest();
             xhr.open('POST', 'JS/request', true);
             xhr.onload = function () {
+                console.log(this.responseText);
                 if (this.responseText) {
                     let image2 = new Image();
                     image2.onload = function () {
                         if (image2) {
                             context2.drawImage(image2, 0, 0);
-                        }
-                        else {
+                        } else {
                             photo.innerHTML = "wrong image type";
                         }
                     }
-                    if (this.responseText === "wrong image data") {
+                    let jsonObj = JSON.parse(this.responseText);
+                    token.value = Object.values(jsonObj)[1];
+                    if (Object.values(jsonObj)[0] === "wrong image data")
                         photo.innerHTML = "Wrong image data";
-                    }
-                    else {
-                        let jsonObj = JSON.parse(this.responseText);
-                        token.value = Object.values(jsonObj)[1];
+                    else
                         image2.src = Object.values(jsonObj)[0];
-                    }
+                }
+                else {
+                    photo.innerHTML = "wrong image type";
                 }
             }
             xhr.send(data);

@@ -24,12 +24,20 @@ class JS extends Model
 			$width = $infoPhoto[0];
 			$height = $infoPhoto[1];
 			if (!$idImg = imagecreatefromstring($textData)) {
-				echo "wrong image data";
+				$json = array(
+					"img" => "wrong image data",
+					"token" => $_SESSION['token']
+				);
+				echo json_encode( $json );
 				exit (0);
 			}
 		}
 		else {
-			echo "wrong image data";
+			$json = array(
+				"img" => "wrong image data",
+				"token" => $_SESSION['token']
+			);
+			echo json_encode( $json );
 			exit (0);
 		}
 
@@ -88,9 +96,6 @@ class JS extends Model
 			"img" => "data:image/png;base64," . base64_encode($i),
 			"token" => $_SESSION['token']
 		);
-		//var_dump("data:image/png;base64," . base64_encode($i));
-		//var_dump(json_encode($json));
-		header("Content-Type: text/html");
 		echo json_encode( $json );
 		//echo "data:image/png;base64," . base64_encode($i);
 	}
