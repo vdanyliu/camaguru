@@ -10,9 +10,16 @@
 		<input hidden id="pic">
         <button disabled id="snap">Snap Photo</button>
         <button disabled id="download">Download photo</button>
+        <button disabled id="postPhoto">PostPhoto</button>
     </div>
 	<div class="selectPhoto">
 		<?php echo $photos ?>
 	</div>
+    <div class="myPhotos">
+        <?php echo $myPhotos?>
+    </div>
+    <div id="debug">
+
+    </div>
 </div>
 <script src="/js/takePhoto.js"></script>

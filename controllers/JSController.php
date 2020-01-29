@@ -9,16 +9,14 @@
 
 		public function requestAction()
 		{
-//			if (isset($_POST['imageSrc']))
-//			{
-//				$this->model->mergeWithLogo($_POST['imageSrc']);
-//			}
-			//var_dump($_POST);
 			if ($_POST)
 			{
 					$metod = key($_POST);
 					$this->model->$metod();
-					//$this->model->imageSrc($key);
+			}
+			else {
+				header("Location: / ");
+				die (0);
 			}
 		}
 	}

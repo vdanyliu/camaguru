@@ -30,3 +30,8 @@ A:visited {
     width: auto;
     height: 10vw;
 }
+
+.myPhotos img{
+    width: auto;
+    height: 5vw;
+}

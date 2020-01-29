@@ -15,8 +15,6 @@
 			}
 			if (!empty($_POST)) {
 				if (!$this->checkFormToken('token')) {
-					var_dump($_POST);
-					var_dump($_SESSION);
 					echo "token error";
 					die(0);
 				}

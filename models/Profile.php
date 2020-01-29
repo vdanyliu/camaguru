@@ -6,66 +6,28 @@ use core\Model;
 
 class Profile extends Model
 {
-	public function check()
-	{
-		echo "rabotaet";
-	}
-
-	public function addPhotoFromPost()
-	{
-		$fileName = $_FILES['imageFromForm']['name'];
-		$filetmp = $_FILES['imageFromForm']['tmp_name'];
-		$fileExt = explode('.', $fileName);
-		$fileActualExt = strtolower(end($fileExt));
-		var_dump($filetmp);
-		if($filetmp != NULL && exif_imagetype($filetmp))
-		{
-			$newfilename = "img/" . uniqid("", true) . "." . $fileActualExt;
-			move_uploaded_file($filetmp, $newfilename);
-			foreach ($_POST as $key => $value)
-				echo $key . "=>" . $value . "<br>";
-			foreach ($_FILES['imageFromForm'] as $key => $value)
-				echo $key . "=>" . $value . "<br>";
-			echo $newfilename . "<br>";
-			$this->mergeWithLogo($newfilename);
-		}
-	}
-
-	public function mergeWithLogo($imgDest)
-	{
-		//$idImg = imagecreatefromjpeg($imgDest);
-		$idImg = imagecreatefrompng($imgDest);
-		$idLogo = imagecreatefrompng("img/text.png");
-		//$idLogo = imagecreatefrompng("img/cat2.png");
-		imagealphablending($idLogo, true);
-		imagesavealpha($idLogo, true);
-		$blind = imagecolorat($idLogo, 20, 20);
-		imagecolortransparent($idLogo, $blind);
-
-		imagecopymerge($idImg, $idLogo, 100, 100, 0, 0, 514, 428, 100);
-		//imagecopymerge($idImg, $idLogo, 700, 500, 0, 0, 514, 428, 100);
-		$resultimage = "img/122.jpg";
-		imagepng($idImg, $resultimage);
-		ob_start();
-		imagepng($idLogo);
-		$i = ob_get_clean();
-		echo "<img src='data:image/png;base64," . base64_encode( $i )."'>";
-		ob_start();
-		imagepng($idImg);
-		$i = ob_get_clean();
-		echo "<img src='data:image/png;base64," . base64_encode( $i )."'>";
-	}
-
 	public function viewSelectablimgs($imgArr)
 	{
+		ob_start();
 		foreach ($imgArr as $key => $value)
 		{
-//			ob_start();
-//			imagepng($idImg);
-//			$i = ob_get_clean();
-//			echo "<img id=\"".$key."\"src='data:image/png;base64," . base64_encode( $i )."'>";
 			echo "<img id='".$key."' onClick=\"picLoad(this.id)\" src='" . $value."'<br>";
-//			echo "<img id='pic' src='" . $value."'<br>";
 		}
+		return ob_get_clean();
+	}
+
+	public function viewMyPhotos()
+	{
+		$sql = "SELECT dest FROM photos WHERE userId = ? ORDER BY date DESC";
+		$arr = [
+			$_SESSION['user']
+		];
+		$result = $this->db->query($sql, $arr);
+		if (!is_null($result))
+			ob_start();
+		foreach ($result as $key) {
+			echo "<img id='".$key['dest']."' onClick=\"picLoad(this.id)\" src='" .$key['dest']."'<br>";
+		}
+		return ob_get_clean();
 	}
 }

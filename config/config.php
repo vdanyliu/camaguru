@@ -93,9 +93,7 @@
 				id int(11) AUTO_INCREMENT PRIMARY KEY,
 				dest CHAR (255) NOT NULL,
 				userId CHAR (255) NOT NULL,
-				date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-				comment char (255) NOT NULL,
-				likes INT NOT NULL DEFAULT '0');";
+				date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);";
 			$PDO->exec($sql);
 		}
 

@@ -3,6 +3,7 @@
      context.setTransform(1, 0, 0, 1, 0, 0);
      context.clearRect(0, 0, canvas.width, canvas.height);
      context.restore();
+     document.getElementById('postPhoto').disabled = true;
  }
 
 var video = document.getElementById('video');
@@ -40,12 +41,11 @@ var video = document.getElementById('video');
                 let context2 = canvas2.getContext('2d');
                 let image2 = new Image();
                 let jsonObj = JSON.parse(this.responseText);
-                //console.log(this.responseText);
-                console.log(Object.values(jsonObj));
                 token.value = Object.values(jsonObj)[1];
                 image2.onload = function () {
                     clearCanvas(canvas2, context2);
                     context2.drawImage(image2, 0, 0);
+                    document.getElementById('postPhoto').disabled = false;
                 };
                 image2.src = Object.values(jsonObj)[0];
             }
@@ -70,12 +70,13 @@ var video = document.getElementById('video');
             let xhr = new XMLHttpRequest();
             xhr.open('POST', 'JS/request', true);
             xhr.onload = function () {
-                console.log(this.responseText);
                 if (this.responseText) {
                     let image2 = new Image();
                     image2.onload = function () {
                         if (image2) {
+                            clearCanvas(canvas2, context2);
                             context2.drawImage(image2, 0, 0);
+                            document.getElementById('postPhoto').disabled = false;
                         } else {
                             photo.innerHTML = "wrong image type";
                         }
@@ -96,6 +97,7 @@ var video = document.getElementById('video');
         if (!video2)
         {
             clearCanvas(canvas2, context2);
+            console.log(canvas2);
             photo.innerHTML = "select file first!!!!!";
         }
         else if (video2.size > 5000000) {
@@ -112,3 +114,19 @@ var video = document.getElementById('video');
      document.getElementById('snap').disabled = false;
      document.getElementById('download').disabled = false;
  };
+
+ document.getElementById("postPhoto").addEventListener("click", function () {
+    let canvas = document.getElementById('canvas2');
+    let token = document.getElementById('token');
+    let img = new Image();
+    img.src = canvas.toDataURL('img/png');
+    let data = new FormData();
+    data.append('postUserImage', img.src);
+    data.append('token', token.value);
+     let xhr = new XMLHttpRequest();
+     xhr.open('POST', 'JS/request', true);
+     xhr.onload = function () {
+         location.reload();
+     };
+     xhr.send(data);
+ });

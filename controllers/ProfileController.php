@@ -10,9 +10,8 @@
 
 		public function createPhotoAction()
 		{
-			ob_start();
-			$this->model->viewSelectablimgs(Config::selectableImages());
-			$arr['photos'] = ob_get_clean();
+			$arr['photos'] = $this->model->viewSelectablimgs(Config::selectableImages());
+			$arr['myPhotos'] = $this->model->viewMyPhotos();
 			$this->view->render("addPhoto", $arr);
 		}
 

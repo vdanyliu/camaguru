@@ -116,8 +116,39 @@ class JS extends Model
 		echo json_encode( $json );
 		//echo "data:image/png;base64," . base64_encode($i);
 	}
-	function resizeImg()
-	{
 
+	public function postUserImage()
+	{
+		$img = $_POST['postUserImage'];
+		$user = $_SESSION['user'];
+		if ($imgLocation = $this->saveImgOnServer($img)) {
+			$this->addImgToDatabase($imgLocation, $user);
+			return (0);
+		}
+	}
+
+	protected function saveImgOnServer($img)
+	{
+		$dir = "img/usersImage/";
+		$ex = explode(',', $img);
+		$textData = base64_decode($ex[1]);
+		$idImg = imagecreatefromstring($textData);
+		imagealphablending($idImg, true);
+		imagesavealpha($idImg, true);
+		$id = uniqid(NULL, true);
+		$filename = $dir.$id.'.png';
+		if (imagepng($idImg, $filename)) {
+			return $filename;
+		}
+		else
+			return NULL;
+	}
+
+	protected function addImgToDatabase($imgLocation, $user) {
+		$arr = [
+			$imgLocation,
+			$user
+		];
+		$this->db->execute("INSERT INTO photos (dest, userId) VALUES (?, ?)", $arr);
 	}
 }

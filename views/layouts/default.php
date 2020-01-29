@@ -13,10 +13,7 @@
 		<a href="/account/login" title="Sign in" class="headerText">Sign in</a>
 		<?php
 		echo "<a href=\"/profile/settings\" title=\"My profile\" class=\"headerText\">";
-		if (isset($_SESSION['user']))
-			echo $_SESSION['user'];
-		else
-			echo "Guest";
+		echo $_SESSION['user'];
 		echo "</a>";
 		?>
 	</p>
