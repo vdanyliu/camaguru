@@ -10,11 +10,16 @@
 <header class="header">
 	<p>
 		<a href="/" title="Main" class="headerText">Main</a>
-		<a href="/account/login" title="Sign in" class="headerText">Sign in</a>
-		<?php
-		echo "<a href=\"/profile/settings\" title=\"My profile\" class=\"headerText\">";
-		echo $_SESSION['user'];
-		echo "</a>";
+        <?php
+            if (!isset($_SESSION['user'])) {
+                echo "<a href=\"/account/login\" title=\"Sign in\" class=\"headerText\">Sign in</a>";
+            }
+			if (isset($_SESSION['user'])) {
+				echo "<a href=\"/profile/settings\" title=\"My profile\" class=\"headerText\">";
+				echo $_SESSION['user'];
+				echo "</a>";
+				echo "<a href=\"/profile/logout\"> Logout </a>";
+			}
 		?>
 	</p>
     <input id="token" value="<?php echo $_SESSION['token']; ?>">

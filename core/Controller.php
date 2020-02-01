@@ -38,7 +38,6 @@
 		{
 			$token = md5(uniqid(microtime(), true));
 			$_SESSION[$form] = $token;
-			//echo $token;
 			return $token;
 		}
 

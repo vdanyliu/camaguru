@@ -1,13 +1,16 @@
-<body>@index.php from view/main/index@
+<body>
 
-<?php //foreach ($users as $key)
-//{
-//	foreach ($key as $keyarr =>$arr)
-//	{
-//		echo '<p>'.$keyarr."->".$arr.'</p>';
-//	}
-//}
-//    var_dump($_POST);
-//	var_dump($_SESSION);
-?>
+
+    <div class="myPhotos">
+        <?php echo $allPhotos; ?>
+    </div>
+
+<div id="photoViewer">
+    <button id = "pre">Back</button>
+    <div id="Photos">
+    </div>
+    <button id = 'next'>Forward</button>
+</div>
+
 </body>
+<script src="/js/viewPhoto.js"></script>

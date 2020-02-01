@@ -1,7 +1,5 @@
 <?php
 	session_start();
-	if (!isset($_SESSION['user']))
-		$_SESSION['user'] = 'Guest';
 //	session_destroy();
 //	header("Content-Type: */*");
 	require './lib/Dev.php';

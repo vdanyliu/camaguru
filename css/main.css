@@ -35,3 +35,8 @@ A:visited {
     width: auto;
     height: 5vw;
 }
+
+#photoViewer img{
+    width: auto;
+    height: 7vw;
+}

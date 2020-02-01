@@ -151,4 +151,24 @@ class JS extends Model
 		];
 		$this->db->execute("INSERT INTO photos (dest, userId) VALUES (?, ?)", $arr);
 	}
+
+	public function getImagesByNumber() {
+		$page = $_POST['getImagesByNumber'];
+		$count = $_POST['countOfPhotos'];
+		$photoArr = $this->getPhotoFromSql($page, $count);
+
+		foreach ($photoArr as $value) {
+			echo "<img id='".$value['dest']."' onClick=\"picLoad(this.id)\" src='" .$value['dest']."'<br>";
+		}
+
+	}
+
+	protected function getPhotoFromSql($page, $count) {
+		$arr = [
+			$count,
+			$page * $count,
+		];
+		$sql = $this->db->query("SELECT * FROM photos ORDER BY date DESC LIMIT ? OFFSET ?", $arr);
+		return $sql;
+	}
 }

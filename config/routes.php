@@ -25,6 +25,12 @@
 			'controller' => 'profile',
 			'action' => 'settings',
 		],
+
+		'profile/logout' => [
+			'controller' => 'profile',
+			'action' => 'logout',
+		],
+
 		'JS/request' => [
 			'controller' => 'JS',
 			'action' => 'request',

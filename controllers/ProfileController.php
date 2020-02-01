@@ -8,6 +8,14 @@
 	class ProfileController extends Controller
 	{
 
+		public function __construct($route) {
+			parent::__construct($route);
+			if (!isset($_SESSION['user'])) {
+				header("Location: /");
+				die();
+			}
+		}
+
 		public function createPhotoAction()
 		{
 			$arr['photos'] = $this->model->viewSelectablimgs(Config::selectableImages());
@@ -17,20 +25,13 @@
 
 		public function settingsAction()
 		{
-			//$this->model->check();
-			ob_start();
-			$file = file_get_contents("img/cat2.png");
-			$img = imagecreatefromstring($file);
-			$file = base64_encode($file);
-			//var_dump($file);
-			ob_start();
-			//imagegif($idImg, "img/122.gif");
-			imagepng($img);
-			$i = ob_get_clean();
-			echo "<img src='data:image/png;base64," . base64_encode($i) . "' alt=”animated”>";
-			//echo "<img src='data:image/png;base64," . $file . "' alt=”animated”>";
-			//$this->model->mergeWithLogo("img/5ded55e76debd7.76984004.jpg");
-			$arr['dev1'] = ob_get_clean();
-			$this->view->render("Settings", $arr);
+
+			$this->view->render("Settings");
+		}
+
+		public function logoutAction() {
+			unset($_SESSION);
+			session_destroy();
+			header("Location: /");
 		}
 	}

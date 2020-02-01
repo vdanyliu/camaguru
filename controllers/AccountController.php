@@ -5,6 +5,15 @@
 
 	class AccountController extends Controller {
 
+		function __construct($route)
+		{
+			parent::__construct($route);
+			if (isset($_SESSION['user'])) {
+				header("Location: /");
+				die();
+			}
+		}
+
 		public function loginAction() {
 			if (!empty($_POST))
 			{
@@ -20,8 +29,9 @@
 					if (!$this->model->doCheckPassword($userARR))
 						$_POST['error'][] = "Password is incorrect<br>";
 					if (empty($_POST['error'])) {
-						var_dump($userARR);
 						$_SESSION['user'] = $userARR['UserName'];
+						header("Location: /");
+						die();
 					}
 				}
 			}
@@ -37,6 +47,7 @@
 				{
 					$this->model->doActivate($id[0]);
 					echo "ACCOUNT ACTIVATED";
+					//////////////////////////////////////////////////////////////////////////////////////////////////////
 				}
 			}
 			$this->view->render("Verify page");

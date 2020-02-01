@@ -9,10 +9,7 @@
 
 		public function indexAction()
 		{
-			$result = $this->model->getUsers();
-			$vars = [
-				'users' => $result,
-			];
-			$this->view->render("index page", $vars);
+			$arr['allPhotos'] = $this->model->getAllPhotos();
+			$this->view->render("index page", $arr);
 		}
 	}

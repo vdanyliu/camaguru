@@ -6,9 +6,12 @@ use core\Model;
 
 class Main extends Model
 {
-	public function getUsers()
-	{
-		$result = $this->db->query("SELECT * FROM users");
-		return $result;
+	public function getAllPhotos() {
+		$photos = $this->db->query("SELECT dest FROM photos ORDER BY date DESC", NULL);
+		ob_start();
+		foreach ($photos as $value) {
+			echo "<img id='".$value['dest']."' onClick=\"picLoad(this.id)\" src='" .$value['dest']."'<br>";
+		}
+		return ob_get_clean();
 	}
 }
