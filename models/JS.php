@@ -156,11 +156,16 @@ class JS extends Model
 		$page = $_POST['getImagesByNumber'];
 		$count = $_POST['countOfPhotos'];
 		$photoArr = $this->getPhotoFromSql($page, $count);
-
+		ob_start();
 		foreach ($photoArr as $value) {
 			echo "<img id='".$value['dest']."' onClick=\"picLoad(this.id)\" src='" .$value['dest']."'<br>";
 		}
-
+		$img = ob_get_clean();
+		$json = [
+			'token' => $_SESSION['token'],
+			'img' => $img
+			];
+		echo json_encode( $json );
 	}
 
 	protected function getPhotoFromSql($page, $count) {

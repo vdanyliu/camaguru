@@ -3,25 +3,25 @@ window.onload = photoController;
 
 function photoController() {
     let page = 0;
-    let countOfPhotos = 5;
+    let countOfPhotos = 2;
     let space = document.getElementById('Photos');
     let token = document.getElementById('token');
-    getPhotoByPage(page);
+    getPhotoByPage();
 
     document.getElementById("next").addEventListener("click", function () {
         page += 1;
-        space.innerHTML = getPhotoByPage(page);
+        getPhotoByPage();
     });
 
     document.getElementById("pre").addEventListener("click", function () {
         if (page !== 0) {
             page -= 1;
-            space.innerHTML = getPhotoByPage(page);
+            getPhotoByPage();
         }
     });
 
 
-    function getPhotoByPage(page) {
+    function getPhotoByPage() {
         let data = new FormData();
         data.append('getImagesByNumber', page);
         data.append('token', token.value);
@@ -29,7 +29,16 @@ function photoController() {
         let xhr = new XMLHttpRequest();
         xhr.open('POST', 'JS/request', true);
         xhr.onload = function () {
-            space.innerHTML = this.response;
+            let json = JSON.parse(this.response);
+            console.log(json);
+            token.value = json.token;
+            if (json.img) {
+                space.innerHTML = json.img;
+            }
+            else {
+                page--;
+            }
+            //space.innerHTML = this.response;
         };
         xhr.send(data);
     }
