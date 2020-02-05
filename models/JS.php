@@ -157,8 +157,15 @@ class JS extends Model
 		$count = $_POST['countOfPhotos'];
 		$photoArr = $this->getPhotoFromSql($page, $count);
 		ob_start();
-		foreach ($photoArr as $value) {
-			echo "<img id='".$value['dest']."' onClick=\"picLoad(this.id)\" src='" .$value['dest']."'<br>";
+		if ($photoArr) {
+			foreach ($photoArr as $value) {
+				echo "
+				<a href='/postReader?dest=" . $value['dest'] . "'>
+				<img id='" . $value['dest'] . "' src='" . $value['dest'] . "'>
+				</a>
+			";
+			}
+			echo '<br>';
 		}
 		$img = ob_get_clean();
 		$json = [

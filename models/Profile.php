@@ -26,7 +26,12 @@ class Profile extends Model
 		if (!is_null($result))
 			ob_start();
 		foreach ($result as $key) {
-			echo "<img id='".$key['dest']."' onClick=\"picLoad(this.id)\" src='" .$key['dest']."'<br>";
+			echo "
+				<a href='/postReader?dest=" . $key['dest'] . "'>
+				<img id='" . $key['dest'] . "' src='" . $key['dest'] . "'>
+				</a>
+			";
+			echo '<br>';
 		}
 		return ob_get_clean();
 	}

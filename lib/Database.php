@@ -31,6 +31,8 @@
 					$this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					Config::userTable($this->link);
 					Config::photoTable($this->link);
+					Config::likesTable($this->link);
+					Config::comentsTable($this->link);
 					return $this;
 				}
 				catch (\PDOException $e)

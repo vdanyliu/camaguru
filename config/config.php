@@ -60,19 +60,13 @@
 				array_push($arr, $img);
 			}
 			return $arr;
-//			return [
-//				0 => "img/cat2.png",
-//				1 => "img/cat1.png",
-//				2 => "img/krol1.png",
-//			];
 		}
 
         /**
          * @param $PDO
          * @return string
          */
-		static function userTable($PDO)
-		{
+		static function userTable($PDO) {
 			$table = "users";
 			$sql = "CREATE TABLE $table(
 				id int(11) AUTO_INCREMENT PRIMARY KEY,
@@ -86,8 +80,8 @@
 			$PDO->exec("INSERT INTO `users` (`id`, `UserName`, `UserEmail`, `Password`, `Activated`, `Admin`) VALUES (NULL, 'admin', 'admin@ukr.net', '".crypt('admin', 'admin')."', NULL, '1');");
 			return (0);
 		}
-		static function photoTable($PDO)
-		{
+
+		static function photoTable($PDO) {
 			$table = "photos";
 			$sql = "CREATE TABLE $table(
 				id int(11) AUTO_INCREMENT PRIMARY KEY,
@@ -97,4 +91,24 @@
 			$PDO->exec($sql);
 		}
 
+		static function likesTable($PDO) {
+			$table = 'likes';
+			$sql = "CREATE TABLE $table(
+				photoid INT NOT NULL,
+				userid INT NOT NULL);
+			)";
+			$PDO->exec($sql);
+		}
+
+		static function commentsTable($PDO) {
+			$table = 'likes';
+			$sql = "CREATE TABLE $table(
+				photoid INT NOT NULL,
+				userid INT NOT NULL
+				body CHAR (255) NOT NULL,
+				date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+				);
+			)";
+			$PDO->exec($sql);
+		}
 	}

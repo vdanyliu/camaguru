@@ -3,7 +3,7 @@ window.onload = photoController;
 
 function photoController() {
     let page = 0;
-    let countOfPhotos = 2;
+    let countOfPhotos = 2; // Count of photos per page
     let space = document.getElementById('Photos');
     let token = document.getElementById('token');
     getPhotoByPage();
@@ -38,7 +38,6 @@ function photoController() {
             else {
                 page--;
             }
-            //space.innerHTML = this.response;
         };
         xhr.send(data);
     }

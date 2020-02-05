@@ -36,6 +36,11 @@
 			'action' => 'request',
 		],
 
+		'postReader' => [
+			'controller' => 'main',
+			'action' => 'postReader',
+		],
+
 		'' => [
 			'controller' => 'main',
 			'action' => 'index',
