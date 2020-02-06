@@ -62,6 +62,13 @@
 			return $arr;
 		}
 
+		static function getLikeImages() {
+			return [
+				'img/like0.png',
+				'img/like1.png',
+			];
+		}
+
         /**
          * @param $PDO
          * @return string

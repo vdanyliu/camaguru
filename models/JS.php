@@ -183,4 +183,83 @@ class JS extends Model
 		$sql = $this->db->query("SELECT * FROM photos ORDER BY date DESC LIMIT ? OFFSET ?", $arr);
 		return $sql;
 	}
+
+
+	private $photoTable;
+	private $userTable;
+	public $likesCount = 0;
+	public $selfLike = 0;
+	private function init($dest) {
+		$this->getUserTable($_SESSION['user']);
+		$this->getPhotoTable($dest);
+		$this->getLikesCount();
+		$this->getSelfLike();
+	}
+	protected function getUserTable($user) {
+		$arr[] = $user;
+		$this->userTable = current($this->db->query("SELECT * FROM users WHERE UserName = ?", $arr));
+	}
+
+	protected function getPhotoTable($dest) {
+		$arr[] = $dest;
+		$this->photoTable = current($this->db->query("SELECT * FROM photos WHERE dest = ?", $arr));
+		if (!$this->photoTable) {
+			header("Location: /");
+			die();
+		}
+	}
+
+	protected function getLikesCount() {
+		$arr[] = $this->photoTable['id'];
+		$likes = current($this->db->query("SELECT COUNT(*) FROM likes WHERE photoid = ?", $arr));
+		$this->likesCount = current($likes);
+	}
+
+	protected function getSelfLike() {
+		if (!$this->userTable)
+			return 0;
+		$arr[] = $this->userTable['id'];
+		$arr[] = $this->photoTable['id'];
+		$result = $this->db->query("SELECT * FROM likes WHERE userid = ? && photoid = ?", $arr);
+		if ($result)
+			$this->selfLike = 1;
+		return 0;
+	}
+
+	protected function getObLike($num) {
+		$like_image = Config::getLikeImages();
+		ob_start();
+		echo '<img id =\'likeBottom\'  src = \''.$like_image[$num].'\'>';
+		return ob_get_clean();
+	}
+
+	public function getLikes() {
+		$this->init($_POST['getLikes']);
+		$json = [
+			'token' => $_SESSION['token'],
+			'likes' => $this->likesCount,
+			'likeImg' => $this->getObLike($this->selfLike),
+		];
+		echo json_encode($json);
+	}
+
+	public function userLike() {
+		$this->init($_POST['userLike']);
+		$arr = [
+			$this->photoTable['id'],
+			$this->userTable['id']
+		];
+		switch ($this->selfLike) {
+			case false:
+				$this->db->execute("INSERT INTO likes (photoid, userid) VALUES (?, ?)", $arr);
+				break;
+			case true:
+				$this->db->execute("DELETE FROM likes WHERE photoid = ? && userid = ?", $arr);
+				break;
+		}
+		$json = [
+			'token' => $_SESSION['token'],
+		];
+		echo json_encode($json);
+	}
 }

@@ -2,6 +2,7 @@
 
 	namespace controllers;
 
+	use config\Config;
 	use core\Controller;
 
 	class MainController extends Controller
@@ -15,11 +16,14 @@
 
 		public function postReaderAction()
 		{
-			$arr['photo'] = $this->model->getPhoto();
-			$arr['likes'] = $this->model->getLikes();
-			$arr['selfLike'] = $this->model->getSelfLike();
+			$arr = [];
+			$this->model->init();
+			$arr['image'] = $this->model->getImage();
+			$arr['likesCount'] = $this->model->likesCount;
+			$arr['selfLike'] = $this->model->selfLike;
+			$arr['like_image'] = Config::getLikeImages();
 			//$arr['comments'] = $this->model->getComments();
-			var_dump($arr);
+			//var_dump($arr);
 			$this->view->render("Photo", $arr);
 		}
 	}

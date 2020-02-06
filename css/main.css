@@ -40,3 +40,13 @@ A:visited {
     width: auto;
     height: 7vw;
 }
+
+.postReader .mainImage img {
+    width: auto;
+    height: 20vw;
+}
+
+.postReader #like img{
+    width: auto;
+    height: 5vw;
+}
