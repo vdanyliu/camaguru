@@ -15,7 +15,7 @@
                 echo "<a href=\"/account/login\" title=\"Sign in\" class=\"headerText\">Sign in</a>";
             }
 			if (isset($_SESSION['user'])) {
-				echo "<a href=\"/profile/settings\" title=\"My profile\" class=\"headerText\">";
+				echo "<a href=\"/profile/settings\" title=\"My profile\" class=\"headerText\" id='userName'>";
 				echo $_SESSION['user'];
 				echo "</a>";
 				echo "<a href=\"/profile/logout\"> Logout </a>";

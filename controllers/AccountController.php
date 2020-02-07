@@ -17,7 +17,7 @@
 		public function loginAction() {
 			if (!empty($_POST))
 			{
-				array_walk($_POST, 'trim_value');
+				array_walk($_POST, 'sanitizee');
 				foreach ($_POST as $key => $value)
 					echo $key."=>".$value."<br>";
 				$userARR = $this->model->getUserByEmail($_POST['u_email']);
@@ -56,7 +56,7 @@
 		public function registerAction() {
 			if (!empty($_POST))
 			{
-				array_walk($_POST, 'trim_value');
+				array_walk($_POST, 'sanitizee');
 				foreach ($_POST as $key => $value) {
 					echo $key . '->' . $value . '<br>';
 				}

@@ -6,6 +6,7 @@ function photoController() {
     let countOfPhotos = 2; // Count of photos per page
     let space = document.getElementById('Photos');
     let token = document.getElementById('token');
+    document.cookie
     getPhotoByPage();
 
     document.getElementById("next").addEventListener("click", function () {

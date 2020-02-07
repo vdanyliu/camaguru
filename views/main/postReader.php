@@ -4,7 +4,14 @@
             <?php echo $image.'<br>'; ?>
         </div>
         <div id="like">
-            <?php echo '<img id=likeBottom src = \''.$like_image[$selfLike].'\'<br>'; ?>
+        </div>
+        <div id="postsView">
+            <div id="posts">
+            </div>
+            <div id="addNewPost">
+                <input id="userComment" size="20" maxlength="255" type="text" placeholder="Comment" >
+                <button id="submitComment">Add Comment</button>
+            </div>
         </div>
     </div>
 </body>

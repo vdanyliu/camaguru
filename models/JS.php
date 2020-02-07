@@ -190,10 +190,13 @@ class JS extends Model
 	public $likesCount = 0;
 	public $selfLike = 0;
 	private function init($dest) {
-		$this->getUserTable($_SESSION['user']);
+		sanitizee($dest);
 		$this->getPhotoTable($dest);
 		$this->getLikesCount();
-		$this->getSelfLike();
+		if (isset($_SESSION['user'])) {
+            $this->getUserTable($_SESSION['user']);
+            $this->getSelfLike();
+        }
 	}
 	protected function getUserTable($user) {
 		$arr[] = $user;
@@ -234,7 +237,7 @@ class JS extends Model
 	}
 
 	public function getLikes() {
-		$this->init($_POST['getLikes']);
+		$this->init(($_POST['getLikes']));
 		$json = [
 			'token' => $_SESSION['token'],
 			'likes' => $this->likesCount,
@@ -257,6 +260,72 @@ class JS extends Model
 				$this->db->execute("DELETE FROM likes WHERE photoid = ? && userid = ?", $arr);
 				break;
 		}
+		$json = [
+			'token' => $_SESSION['token'],
+		];
+		echo json_encode($json);
+	}
+	
+	protected function getPostsFromSql($page, $count, $dest) {
+		$arr = [
+			$this->getPhotoIDByDest($dest),
+			$count,
+			$page * $count,
+		];
+		$sql = $this->db->query("SELECT * FROM comments WHERE photoid = ? ORDER BY date DESC LIMIT ? OFFSET ?", $arr);
+		return $sql;
+	}
+	
+	public function getPostsByPage() {
+		$page = $_POST['getPostsByPage'];
+		$count = $_POST['postCount'];
+		$dest = $_POST['dest'];
+		$photoArr = $this->getPostsFromSql($page, $count, $dest);
+		ob_start();
+		if ($photoArr) {
+			foreach ($photoArr as $value) {
+				echo "
+				<div class='comment'>
+					<div class='user'>
+						".$value['username']."
+					</div>
+					<div class='userComment'>
+						".$value['body']."
+					</div>
+				</div>
+				<br>
+			";
+			}
+			echo '<br>';
+		}
+		$htmlText = ob_get_clean();
+		$json = [
+			'token' => $_SESSION['token'],
+			'htmlText' => $htmlText
+		];
+		echo json_encode( $json );
+	}
+	
+	private function getPhotoIDByDest($dest) {
+		sanitizee($dest);
+		$arr = [
+			$dest
+		];
+		return current(current($this->db->query("SELECT id FROM photos WHERE dest = ?", $arr)));
+		
+	}
+	
+	public function addComment() {
+		if (!$_SESSION['user'])
+			return 0;
+		$sanitazeText = $_POST['addComment'];
+		sanitizee($sanitaze);
+		$arr = [
+			$this->getPhotoIDByDest($_POST['dest']),
+			$_SESSION['user'],
+			$sanitazeText,
+		];
+		$this->db->execute("INSERT INTO comments (photoid, username, body) VALUES (?, ?, ?)", $arr);
 		$json = [
 			'token' => $_SESSION['token'],
 		];
