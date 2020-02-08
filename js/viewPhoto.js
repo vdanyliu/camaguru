@@ -1,3 +1,14 @@
+if (document.addEventListener) {
+    window.addEventListener('pageshow', function (event) {
+            if (event.persisted || window.performance &&
+                window.performance.navigation.type === 2)
+            {
+                location.reload();
+            }
+        },
+        false);
+}
+
 window.onload = photoController;
 
 
@@ -6,7 +17,6 @@ function photoController() {
     let countOfPhotos = 2; // Count of photos per page
     let space = document.getElementById('Photos');
     let token = document.getElementById('token');
-    document.cookie
     getPhotoByPage();
 
     document.getElementById("next").addEventListener("click", function () {
@@ -31,13 +41,12 @@ function photoController() {
         xhr.open('POST', 'JS/request', true);
         xhr.onload = function () {
             let json = JSON.parse(this.response);
-            console.log(json);
             token.value = json.token;
             if (json.img) {
                 space.innerHTML = json.img;
             }
             else {
-                page--;
+                page = page = 0 ? 0 : page--;
             }
         };
         xhr.send(data);

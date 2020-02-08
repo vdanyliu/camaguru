@@ -1,4 +1,16 @@
- function clearCanvas(canvas, context) {
+if (document.addEventListener) {
+    window.addEventListener('pageshow', function (event) {
+            if (event.persisted || window.performance &&
+                window.performance.navigation.type === 2)
+            {
+                location.reload();
+            }
+        },
+        false);
+}
+
+
+function clearCanvas(canvas, context) {
      context.save();
      context.setTransform(1, 0, 0, 1, 0, 0);
      context.clearRect(0, 0, canvas.width, canvas.height);

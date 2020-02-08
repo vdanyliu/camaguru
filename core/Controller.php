@@ -11,10 +11,13 @@
 		public function __construct($route)
 		{
 			if (!isset($_SESSION['token'])) {
+				echo "Sessii net";
 				$this->generateFormToken('token');
 			}
 			if (!empty($_POST)) {
 				if (!$this->checkFormToken('token')) {
+					echo $_SESSION['token'].'<br>';
+					echo $_POST['token'].'<br>';
 					echo "token error";
 					die(0);
 				}

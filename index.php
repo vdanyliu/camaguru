@@ -1,5 +1,6 @@
 <?php
 	session_start();
+//	header("Cache-Control: no-cache, no-store, must-revalidate");
 //	session_destroy();
 //	header("Content-Type: */*");
 	require './lib/Dev.php';

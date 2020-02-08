@@ -1,3 +1,14 @@
+if (document.addEventListener) {
+    window.addEventListener('pageshow', function (event) {
+            if (event.persisted || window.performance &&
+                window.performance.navigation.type === 2)
+            {
+                location.reload();
+            }
+        },
+        false);
+}
+
 window.onload = pageController;
 
 function pageController() {
@@ -80,21 +91,43 @@ function pageController() {
         xhr.send(data);
     }
     
+    let page = 0;
+    let Count = 5;
+    let nextBottom = document.getElementById("next");
+    let preBottom = document.getElementById("pre");
+    nextBottom.addEventListener("click", function () {
+        page += 1;
+        initPost();
+    });
+    
+    preBottom.addEventListener("click", function () {
+        if (page !== 0) {
+            page -= 1;
+            initPost();
+        }
+    });
+    
     function initPost() {
-        initPost.page = 0;
-        initPost.Count = 5;
         let data = new FormData();
-        data.append('getPostsByPage', initPost.page);
-        data.append('postCount', initPost.Count);
+        data.append('getPostsByPage', page);
+        data.append('postCount', Count);
         data.append('token', token.value);
         data.append('dest', imageDest);
         let xhr = new XMLHttpRequest();
         xhr.open('POST', 'JS/request');
         xhr.onload = function () {
             let json = JSON.parse(this.response);
-            console.log(json);
             token.value = json.token;
-            posts.innerHTML = json.htmlText;
+            if (json.htmlText) {
+                posts.innerHTML = json.htmlText;
+                if (posts.innerHTML) {
+                    nextBottom.hidden = false;
+                    preBottom.hidden = false;
+                }
+            }
+            else {
+                page = page = 0 ? 0 : page--;
+            }
         };
         xhr.send(data);
     }
