@@ -11,8 +11,8 @@
 		{
 			if ($_POST)
 			{
-					$metod = key($_POST);
-					$this->model->$metod();
+					$method = key($_POST);
+					$this->model->$method();
 			}
 			else {
 				header("Location: / ");

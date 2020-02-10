@@ -10,7 +10,6 @@
 		public function indexAction()
 		{
 			$arr = [];
-			//$arr['allPhotos'] = $this->model->getAllPhotos();
 			$this->view->render("index page", $arr);
 		}
 
@@ -22,8 +21,6 @@
 			$arr['likesCount'] = $this->model->likesCount;
 			$arr['selfLike'] = $this->model->selfLike;
 			$arr['like_image'] = Config::getLikeImages();
-			//$arr['comments'] = $this->model->getComments();
-			//var_dump($arr);
 			$this->view->render("Photo", $arr);
 		}
 	}
