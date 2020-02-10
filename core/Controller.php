@@ -11,7 +11,6 @@
 		public function __construct($route)
 		{
 			if (!isset($_SESSION['token'])) {
-				echo "Sessii net";
 				$this->generateFormToken('token');
 			}
 			if (!empty($_POST)) {

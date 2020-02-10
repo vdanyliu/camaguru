@@ -71,12 +71,14 @@
 				if (empty($_POST['error']))
 				{
 					$this->model->addNewUser($_POST);
-					//$this->model-> sendRegistrationMail();
-					//header("Location: /account/verify?mailVerify=1");
+					$this->model-> sendRegistrationMail();
+					header("Location: /account/verify?mailVerify=1");
 					// Временное решение :)
-					$verify = $_POST['1'];
-					echo "<a href=\"/account/verify?check=".$verify."\" title=\"/account/verify?check=".$verify."\" class=\"headerText\">/account/verify?check=".$verify."</a>";
-					exit();
+//					$verify = $_POST['1'];
+//					$mail_body = "<a href=\"/account/verify?check=".$verify."\" title=\"/account/verify?check=".$verify."\" class=\"headerText\">/account/verify?check=".$verify."</a>";
+//					mail($_POST['u_email'], "Camaguru", $mail_body);
+					//echo "<a href=\"/account/verify?check=".$verify."\" title=\"/account/verify?check=".$verify."\" class=\"headerText\">/account/verify?check=".$verify."</a>";
+					//exit();
 				}
 			}
 			$this->view->render("Register page");

@@ -118,6 +118,7 @@ function pageController() {
         xhr.onload = function () {
             let json = JSON.parse(this.response);
             token.value = json.token;
+            console.log(json.htmlText);
             if (json.htmlText) {
                 posts.innerHTML = json.htmlText;
                 if (posts.innerHTML) {
@@ -126,7 +127,7 @@ function pageController() {
                 }
             }
             else {
-                page = page = 0 ? 0 : page--;
+                page = page < 0 ? page + 1 : page - 1 ;
             }
         };
         xhr.send(data);
