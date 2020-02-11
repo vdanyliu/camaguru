@@ -81,7 +81,8 @@
 				UserEmail CHAR (255) NOT NULL,
 				Password char (255) not null,
 				Activated char (255) null,
-				Admin int (1) not null);";
+				Admin int (1) not null,
+				notification int (2) not null DEFAULT '1');";
 			$PDO->exec($sql);
 			$PDO->exec("INSERT INTO `users` (`id`, `UserName`, `UserEmail`, `Password`, `Activated`, `Admin`) VALUES (NULL, 'root', 'a@ukr.net', '".crypt('root', 'salt')."', NULL, '1');");
 			$PDO->exec("INSERT INTO `users` (`id`, `UserName`, `UserEmail`, `Password`, `Activated`, `Admin`) VALUES (NULL, 'admin', 'admin@ukr.net', '".crypt('admin', 'admin')."', NULL, '1');");

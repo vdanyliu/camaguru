@@ -19,11 +19,11 @@
 		</div>
 		<div class="registerField">
 			<label>Password</label><br>
-			<input name="u_pass" type="password" placeholder="At least 6 symbols"><br>
+			<input name="u_pass" type="password" size="20" placeholder="At least 6 symbols"><br>
 		</div>
 		<div class="registerField">
 			<label>Re-enter password</label><br>
-			<input name="u_passCheck" type="password" placeholder="Password"><br>
+			<input name="u_passCheck" type="password" size="20" placeholder="Password"><br>
 		</div>
 		<div class=registerButton">
 			<input name="submit" type="submit" value="Submit"><br>

@@ -18,7 +18,7 @@
 					echo $_SESSION['token'].'<br>';
 					echo $_POST['token'].'<br>';
 					echo "token error";
-					die(0);
+//					die(0);
 				}
 			}
 			$this->generateFormToken('token');

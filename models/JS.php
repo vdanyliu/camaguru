@@ -331,4 +331,83 @@ class JS extends Model
 		];
 		echo json_encode($json);
 	}
+	
+	
+	protected function uniqNameCheck($name) {
+		$arr[] = $name;
+		$result = $this->db->query("SELECT * FROM users WHERE UserName = ?", $arr);
+		if ($result)
+			return 0;
+		return 1;
+	}
+	
+	public function changeName() {
+		$oldName = $_POST['oldName'];
+		$newName = $_POST['newName'];
+		$json['token'] = $_SESSION['token'];
+		
+		if ($oldName == $_SESSION['user'])
+		{
+			if ($this->uniqNameCheck($newName)) {
+				$arr = [
+					$newName,
+					$oldName,
+				];
+				$this->db->execute("UPDATE users SET UserName = ? WHERE UserName = ?", $arr);
+				$_SESSION['user'] = $newName;
+			}
+			else
+				$json['error'] = 'New user name is already taken';
+		}
+		else {
+			$json['error'] = 'Current name != Old name input';
+		}
+		echo json_encode($json);
+	}
+	
+	protected function matchPass($pass) {
+		$arr[] = $_SESSION['user'];
+		$userPass = current(current($this->db->query("SELECT Password FROM users WHERE UserName = ?", $arr)));
+		return password_verify($pass, $userPass);
+	}
+	
+	public function changePass() {
+		$oldPass = $_POST['oldPass'];
+		$newPass = $_POST['newPass'];
+		$newPassConfirm = $_POST['newPassConfirm'];
+		$json['token'] = $_SESSION['token'];
+		
+		if ($newPass == $newPassConfirm) {
+			if ($this->matchPass($oldPass)) {
+				$arr = [
+					password_hash($newPass, PASSWORD_BCRYPT),
+					$_SESSION['user'],
+				];
+				$this->db->execute("UPDATE users set Password = ? WHERE UserName = ?", $arr);
+			}
+			else
+				$json['error'] = 'Password mismatch';
+		}
+		else
+			$json['error'] = 'Password mismatch';
+		echo json_encode($json);
+	}
+	
+	public function getNotificationStatus() {
+		$arr[] = $_SESSION['user'];
+		$json['token'] = $_SESSION['token'];
+		$result = current($this->db->query("SELECT * FROM users WHERE UserName = ?", $arr));
+		$json['status'] = $result['notification'];
+		echo json_encode($json);
+	}
+	
+	public function switchNotification() {
+		$json['token'] = $_SESSION['token'];
+		$arr = [
+			$_POST['to'],
+			$_SESSION['user']
+		];
+		$this->db->execute("UPDATE users set notification = ? WHERE UserName = ?", $arr);
+		echo json_encode($json);
+	}
 }

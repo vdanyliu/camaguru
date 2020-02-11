@@ -1,13 +1,3 @@
-if (document.addEventListener) {
-    window.addEventListener('pageshow', function (event) {
-            if (event.persisted || window.performance &&
-                window.performance.navigation.type === 2)
-            {
-                location.reload();
-            }
-        },
-        false);
-}
 
 window.onload = pageController;
 
@@ -17,13 +7,11 @@ function pageController() {
     let token = document.getElementById('token');
     let imageDest = new URL(location.href).searchParams.get('dest');
     let posts = document.getElementById('posts');
-    initLike(function () {
-        initPost();
-    });
-    //let commentsField = document.getElementById('comments');
+    let page = 0;
+    let Count = 5;
+    initLike(function () {initPost();});
     
     likeTag.addEventListener("click", userClickLike);
-    //initPost();
     let addPostBottom = document.getElementById('submitComment');
     addPostBottom.addEventListener("click", addPost);
 
@@ -91,8 +79,6 @@ function pageController() {
         xhr.send(data);
     }
     
-    let page = 0;
-    let Count = 5;
     let nextBottom = document.getElementById("next");
     let preBottom = document.getElementById("pre");
     nextBottom.addEventListener("click", function () {

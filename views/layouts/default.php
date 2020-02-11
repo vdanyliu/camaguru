@@ -1,3 +1,15 @@
+<script>
+	if (document.addEventListener) {
+		window.addEventListener('pageshow', function (event) {
+				if (event.persisted || window.performance &&
+					window.performance.navigation.type === 2)
+				{
+					location.reload();
+				}
+			},
+			false);
+	}
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +34,7 @@
 			}
 		?>
 	</p>
-    <input id="token" value="<?php echo $_SESSION['token']; ?>">
+    <input id="token" readonly value="<?php echo $_SESSION['token']; ?>">
 </header>
 <?php echo $content; ?>
 </body>
