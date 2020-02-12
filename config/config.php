@@ -94,7 +94,7 @@
 			$sql = "CREATE TABLE $table(
 				id int(11) AUTO_INCREMENT PRIMARY KEY,
 				dest CHAR (255) NOT NULL,
-				userId CHAR (255) NOT NULL,
+				userId int (11) NOT NULL,
 				date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);";
 			$PDO->exec($sql);
 		}
@@ -109,10 +109,10 @@
 		}
 
 		static function commentsTable($PDO) {
-			$table = 'likes';
+			$table = 'comments';
 			$sql = "CREATE TABLE $table(
 				photoid INT NOT NULL,
-				userid INT NOT NULL
+				userid INT NOT NULL,
 				body CHAR (255) NOT NULL,
 				date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 				);

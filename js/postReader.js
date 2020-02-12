@@ -94,6 +94,7 @@ function pageController() {
     });
     
     function initPost() {
+        console.log(page);
         let data = new FormData();
         data.append('getPostsByPage', page);
         data.append('postCount', Count);
@@ -113,7 +114,7 @@ function pageController() {
                 }
             }
             else {
-                page = page < 0 ? page + 1 : page - 1 ;
+                page = page > 0 ? page - 1 : 0 ;
             }
         };
         xhr.send(data);

@@ -46,7 +46,7 @@ function photoController() {
 				space.innerHTML = json.img;
 			}
 			else {
-				page = page < 0 ? page + 1 : page - 1 ;
+				page = page > 0 ? page - 1 : 0 ;
 			}
 		};
 		xhr.send(data);

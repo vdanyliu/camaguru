@@ -32,7 +32,7 @@
 					Config::userTable($this->link);
 					Config::photoTable($this->link);
 					Config::likesTable($this->link);
-					Config::comentsTable($this->link);
+					Config::commentsTable($this->link);
 					return $this;
 				}
 				catch (\PDOException $e)

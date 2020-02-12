@@ -147,7 +147,7 @@ class JS extends Model
 	protected function addImgToDatabase($imgLocation, $user) {
 		$arr = [
 			$imgLocation,
-			$user
+			$this->getUserIdByUsername($user),
 		];
 		$this->db->execute("INSERT INTO photos (dest, userId) VALUES (?, ?)", $arr);
 	}
@@ -268,12 +268,18 @@ class JS extends Model
 	
 	protected function getPostsFromSql($page, $count, $dest) {
 		$arr = [
-			$this->getPhotoIDByDest($dest),
+			$this->getPhotoTableByDest($dest)['id'],
 			$count,
 			$page * $count,
 		];
 		$sql = $this->db->query("SELECT * FROM comments WHERE photoid = ? ORDER BY date DESC LIMIT ? OFFSET ?", $arr);
 		return $sql;
+	}
+	
+	protected function getUserNameById($userid) {
+		$arr[] = $userid;
+		$result = current($this->db->query("SELECT UserName FROM users WHERE id = ?", $arr));
+		return $result['UserName'];
 	}
 	
 	public function getPostsByPage() {
@@ -287,7 +293,7 @@ class JS extends Model
 				echo "
 				<div class='comment'>
 					<div class='user'>
-						".$value['username']."
+						".$this->getUserNameById($value['userid'])."
 					</div>
 					<div class='userComment'>
 						".$value['body']."
@@ -306,13 +312,32 @@ class JS extends Model
 		echo json_encode( $json );
 	}
 	
-	private function getPhotoIDByDest($dest) {
+	private function getPhotoTableByDest($dest) {
 		sanitizee($dest);
 		$arr = [
 			$dest
 		];
-		return current(current($this->db->query("SELECT id FROM photos WHERE dest = ?", $arr)));
+		return (current($this->db->query("SELECT * FROM photos WHERE dest = ?", $arr)));
 		
+	}
+	
+	protected function getUserIdByUsername($username) {
+		$arr[] = $username;
+		$result = current($this->db->query("SELECT id FROM users WHERE UserName = ?", $arr));
+		return $result['id'];
+	}
+	
+	protected function getUserTableById($id) {
+		$arr[] = $id;
+		return current($this->db->query("SELECT * FROM users WHERE id = ?", $arr));
+	}
+	
+	protected function sendNotificationMail($userid) {
+		$result = ($this->getUserTableById($userid));
+		if ($result['notification']) {
+			$mail_body = "u got a new comment";
+			mail($result['UserEmail'], "Camaguru", $mail_body);
+		}
 	}
 	
 	public function addComment() {
@@ -320,12 +345,14 @@ class JS extends Model
 			return 0;
 		$sanitazeText = $_POST['addComment'];
 		sanitizee($sanitaze);
+		$photoTable = $this->getPhotoTableByDest($_POST['dest']);
 		$arr = [
-			$this->getPhotoIDByDest($_POST['dest']),
-			$_SESSION['user'],
+			$photoTable['id'],
+			$this->getUserIdByUsername($_SESSION['user']),
 			$sanitazeText,
 		];
-		$this->db->execute("INSERT INTO comments (photoid, username, body) VALUES (?, ?, ?)", $arr);
+		$this->db->execute("INSERT INTO comments (photoid, userid, body) VALUES (?, ?, ?)", $arr);
+		$this->sendNotificationMail($photoTable['userId']);
 		$json = [
 			'token' => $_SESSION['token'],
 		];

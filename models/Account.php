@@ -44,7 +44,7 @@ class Account extends Model
 	{
 		$verify = $_POST['1'];
 		$mail_body = "<a href=\"".$_SERVER["HTTP_HOST"]."/account/verify?check=".$verify."\" title=\"/account/verify?check=".$verify."\" class=\"headerText\">/account/verify?check=".$verify."</a>";
-		var_dump(mail($_POST['u_email'], "Camaguru", $mail_body));
+		mail($_POST['u_email'], "Camaguru", $mail_body);
 	}
 
 	public function getUserByVerify($verify)

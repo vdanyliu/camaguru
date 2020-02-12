@@ -16,7 +16,7 @@
 		<?php echo $photos ?>
 	</div>
     <div class="myPhotos">
-        <?php echo $myPhotos?>
+        <?php echo $myPhotos;?>
     </div>
     <div id="debug">
 

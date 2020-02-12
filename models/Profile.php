@@ -15,12 +15,18 @@ class Profile extends Model
 		}
 		return ob_get_clean();
 	}
-
+	
+	protected function getUserIdByUsername($username) {
+		$arr[] = $username;
+		$result = current($this->db->query("SELECT id FROM users WHERE UserName = ?", $arr));
+		return $result['id'];
+	}
+	
 	public function viewMyPhotos()
 	{
 		$sql = "SELECT dest FROM photos WHERE userId = ? ORDER BY date DESC";
 		$arr = [
-			$_SESSION['user']
+			$this->getUserIdByUsername($_SESSION['user']),
 		];
 		$result = $this->db->query($sql, $arr);
 		if (!is_null($result))
