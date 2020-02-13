@@ -98,4 +98,19 @@ function pageController() {
 		};
 		xhr.send(data);
 	}
+	
+	document.getElementById("deleteSelfUser").addEventListener("click", function () {
+		let token = document.getElementById('token');
+		if (confirm("Delete your Account?")) {
+			let data = new FormData();
+			data.append('deleteUser', 1);
+			data.append('token', token.value);
+			let xhr = new XMLHttpRequest();
+			xhr.open('POST', 'JS/request', true);
+			xhr.onload = function () {
+				location.reload();
+			};
+			xhr.send(data);
+		}
+	});
 }

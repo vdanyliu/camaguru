@@ -39,7 +39,7 @@ A:visited {
 
 #photoViewer img{
     width: auto;
-    height: 7vw;
+    height: 20vw;
 }
 
 .postReader .mainImage img {
@@ -50,4 +50,20 @@ A:visited {
 .postReader #like img{
     width: auto;
     height: 5vw;
+}
+
+.photoPreview  *{
+    width: auto;
+    height: 20vw;
+}
+.photoPreview #video{
+    position: absolute;
+    z-index: -1;
+}
+
+
+#preview {
+    /*border-radius: 8px;*/
+    border-color: aqua;
+   /*border-style: solid;*/
 }

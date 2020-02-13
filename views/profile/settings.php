@@ -18,6 +18,9 @@
 		<div class="notificationStatus" id="notificationStatus"></div>
 		<button type="submit" class="settingBottom" id="changeNotificationStatus">Change Email Notification</button>
 	</div>
+	<div class="deleteUser">
+		<button type="submit" class="settingBottom" id="deleteSelfUser">Delete account</button>
+	</div>
 </div>
 
 <script src="js/settings.js"></script>

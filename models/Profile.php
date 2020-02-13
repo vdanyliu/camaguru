@@ -36,6 +36,7 @@ class Profile extends Model
 				<a href='/postReader?dest=" . $key['dest'] . "'>
 				<img id='" . $key['dest'] . "' src='" . $key['dest'] . "'>
 				</a>
+				<button onclick=\"deletePost('" . $key['dest'] . "')\">DeletePhoto</button>
 			";
 			echo '<br>';
 		}

@@ -67,17 +67,12 @@ class JS extends Model
 		}
 		imagedestroy($idImg);
 		$idImg = $new;
-
-		//$idLogo = imagecreatefrompng($idPic);
-		//
-		//var_dump($idPic);
+		
 		$idLogo = file_get_contents($idPic, FILE_USE_INCLUDE_PATH);
-		//$idPic = base64_encode($idPic);
-		//var_dump($idPic);
+
 
 		$idLogo = imagecreatefromstring($idLogo);
-		//var_dump($idPic);
-		//
+
 		$infoPhoto = getimagesize($idPic);
 		$width = $infoPhoto[0];
 		$height = $infoPhoto[1];
@@ -436,5 +431,93 @@ class JS extends Model
 		];
 		$this->db->execute("UPDATE users set notification = ? WHERE UserName = ?", $arr);
 		echo json_encode($json);
+	}
+	
+	public function getPreImageById() {
+		$widthNew = 640;
+		$heightNew = 480;
+		$widthLogo = 150;
+		$heightLogo = 150;
+		$idPic = $_POST['imagePic'];
+		$imgPic = Config::selectableImages();
+		$blind = 2147483647; //white color
+		if (array_key_exists($idPic, $imgPic)) {
+			$idPic = $imgPic[$idPic];
+		}
+		else {
+			$idPic = $imgPic['0'];
+		}
+		$idLogo = file_get_contents($idPic, FILE_USE_INCLUDE_PATH);
+		
+		
+		$idLogo = imagecreatefromstring($idLogo);
+		
+		$infoPhoto = getimagesize($idPic);
+		$width = $infoPhoto[0];
+		$height = $infoPhoto[1];
+		
+		$new = imagecreatetruecolor($widthLogo, $heightLogo);
+		imagealphablending($new, true);
+		imagesavealpha($new, true);
+		imagefill($new, 0, 0, $blind);
+		imagecolortransparent($new, $blind);
+		$tw = ceil($heightLogo / ($height / $width));
+		$th = ceil($widthLogo / ($width / $height));
+		if ($tw < $widthLogo) {
+			imagecopyresampled($new, $idLogo, ceil(($widthLogo - $tw) / 2), 0, 0, 0, $tw, $heightLogo, $width, $height);
+		}
+		else {
+			imagecopyresampled($new, $idLogo, 0, ceil(($heightLogo - $th) / 2), 0, 0, $widthLogo, $th, $width, $height);
+		}
+		imagedestroy($idLogo);
+		$idLogo = $new;
+		
+		$new = imagecreatetruecolor($widthNew, $heightNew);
+		imagealphablending($new, true);
+		imagesavealpha($new, true);
+		imagefill($new, 0, 0, $blind);
+		imagecolortransparent($new, $blind);
+		$idImg = $new;
+		
+		imagecopymerge($idImg, $idLogo, 200, 200, 0, 0, $widthLogo, $heightLogo, 100);
+		ob_start();
+			imagepng($idImg);
+		$i = ob_get_clean();
+		header('Content-Type: application/json');
+		$json = array(
+			"image" => "data:image/png;base64," . base64_encode($i),
+			"token" => $_SESSION['token']
+		);
+		echo json_encode( $json );
+	}
+	
+	protected function deletePostByDest($dest) {
+		$photoId = $this->getPhotoTableByDest($dest)['id'];
+		$arr[] = $photoId;
+		$this->db->execute("DELETE FROM comments WHERE photoid = ?", $arr);
+		$this->db->execute("DELETE FROM likes WHERE photoid = ?", $arr);
+		$this->db->execute("DELETE FROM photos WHERE id = ?", $arr);
+		unlink($dest);
+	}
+	
+	public function deletePostByDestPOST() {
+		$this->deletePostByDest($_POST['id']);
+	}
+	
+	protected function getAllUsersPost($userid) {
+		$arr[] = $userid;
+		$result = $this->db->query("SELECT dest FROM photos WHERE userId = ?", $arr);
+		foreach ($result as $value) {
+			$this->deletePostByDest($value['dest']);
+		}
+	}
+	
+	public function deleteUser() {
+		$this->getUserTable($_SESSION['user']);
+		$this->getAllUsersPost($this->userTable['id']);
+		$arr[] = $this->userTable['id'];
+		$this->db->execute("DELETE FROM users WHERE id = ?", $arr);
+		unset($_SESSION);
+		session_destroy();
 	}
 }

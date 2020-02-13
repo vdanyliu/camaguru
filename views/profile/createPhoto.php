@@ -1,5 +1,6 @@
-<div>
+<div class="photoPreview">
     <video id="video" width="640" height="480" autoplay></video>
+	<canvas id ='preview' width="640" height="480"></canvas>
     <canvas id="canvas" width="640" height="480" hidden="true"></canvas>
     <canvas id="canvas2" width="640" height="480"></canvas>
     <div id="photo"></div>
