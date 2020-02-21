@@ -18,8 +18,6 @@
 			if (!empty($_POST))
 			{
 				array_walk($_POST, 'sanitizee');
-				foreach ($_POST as $key => $value)
-					echo $key."=>".$value."<br>";
 				$userARR = $this->model->getUserByEmail($_POST['u_email']);
 				if (!$userARR)
 					$_POST['error'][] = "Email incorrect";
@@ -57,9 +55,6 @@
 			if (!empty($_POST))
 			{
 				array_walk($_POST, 'sanitizee');
-				foreach ($_POST as $key => $value) {
-					echo $key . '->' . $value . '<br>';
-				}
 				if ((!$_POST['u_nickname']) || !$_POST['u_email'] || !$_POST['u_pass'])
 					$_POST['error'][] = "Fill in all the fields";
 				if (strlen($_POST['u_pass']) <= 5)

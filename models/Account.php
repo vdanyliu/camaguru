@@ -80,7 +80,7 @@ class Account extends Model
 	public function doCheckVerify($userArr)
 	{
 
-		if ($userArr['Activated'] == 'yes')
+		if ($userArr['Activated'] == 'yes' || !$userArr['Activated'])
 			return TRUE;
 		return FALSE;
 	}
