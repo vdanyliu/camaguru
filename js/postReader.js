@@ -94,7 +94,6 @@ function pageController() {
     });
     
     function initPost() {
-        console.log(page);
         let data = new FormData();
         data.append('getPostsByPage', page);
         data.append('postCount', Count);
@@ -105,7 +104,6 @@ function pageController() {
         xhr.onload = function () {
             let json = JSON.parse(this.response);
             token.value = json.token;
-            console.log(json.htmlText);
             if (json.htmlText) {
                 posts.innerHTML = json.htmlText;
                 if (posts.innerHTML) {
