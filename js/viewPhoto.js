@@ -14,7 +14,7 @@ window.onload = photoController;
 
 function photoController() {
 	let page = 0;
-	let countOfPhotos = 3; // Count of photos per page
+	let countOfPhotos = 6; // Count of photos per page
 	let space = document.getElementById('Photos');
 	let token = document.getElementById('token');
 	getPhotoByPage();

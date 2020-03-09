@@ -1,10 +1,10 @@
 <body>
 
 <div id="photoViewer">
-    <button id = "pre">Back</button>
+    <button id = "pre" class="btn btn-dark btn-block ">Back</button>
     <div id="Photos">
     </div>
-    <button id = 'next'>Forward</button>
+    <button id = 'next' class="btn btn-dark btn-block ">Forward</button>
 </div>
 
 </body>

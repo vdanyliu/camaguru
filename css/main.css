@@ -1,3 +1,10 @@
+/*button {*/
+/*    background-color: #818c98;*/
+/*    color: #fff;*/
+/*    border-radius: 12px;*/
+/*    !* width: 80px; *!*/
+/*    border: none;*/
+/*}*/
 
 A {
     text-decoration: none;
@@ -11,19 +18,34 @@ A:visited {
     width:50%;
 }
 
+img {
+    width: auto;
+    height: 20vw;
+}
+
 .selectPhoto img{
     width: auto;
     height: 10vw;
 }
 
-.myPhotos img{
-    width: auto;
-    height: 5vw;
-}
+/*.myPhotos img{*/
+/*    width: auto;*/
+/*    height: 5vw;*/
+/*}*/
 
 #photoViewer img{
     width: auto;
     height: 20vw;
+    margin: 1vw;
+}
+
+#Photos {
+    text-align: center;
+}
+
+#Photos img {
+    display: inline-block;
+
 }
 
 .postReader .mainImage img {
@@ -50,4 +72,12 @@ A:visited {
     /*border-radius: 8px;*/
     border-color: aqua;
    /*border-style: solid;*/
+}
+
+nav {
+    margin-bottom: 1vw;
+}
+
+input {
+    width: 20vw;
 }

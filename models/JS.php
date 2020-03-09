@@ -160,7 +160,6 @@ class JS extends Model
 				</a>
 			";
 			}
-			echo '<br>';
 		}
 		$img = ob_get_clean();
 		$json = [

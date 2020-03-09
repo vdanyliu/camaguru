@@ -1,4 +1,3 @@
-
 <a href="/profile/createPhoto" title="My profile" class="headerText">addPhoto</a>
 <br>
 
